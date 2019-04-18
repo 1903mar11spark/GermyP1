@@ -1,6 +1,12 @@
 package com.servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.Beans.ReimbursementsReq;
+import com.revature.Service.ReimbursementService;
+
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +41,17 @@ public class ReimbursementsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ReimbursementService service = new ReimbursementService();
+		ObjectMapper map = new ObjectMapper();
+		ReimbursementsReq req = map.readValue(request.getInputStream(), ReimbursementsReq.class);
+		
+		try {
+			service.submitRequest(req);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		doGet(request, response);
 	}
 

@@ -8,7 +8,10 @@ public class Employees {
 	private String email;
 	private String password;
 	private String title;
+	private String img;
+	private Integer managerID = null;
 	
+
 	public Employees() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,6 +25,41 @@ public class Employees {
 		this.email = email;
 		this.password = password;
 		this.title = title;
+	}
+	
+	
+
+	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
+			String img, Integer managerID) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.password = password;
+		this.title = title;
+		this.img = img;
+		this.managerID = managerID;
+	}
+
+	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
+			String img) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.password = password;
+		this.title = title;
+		this.img = img;
+	}
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	
 	}
 	
 	public Integer getId() {
@@ -70,7 +108,7 @@ public class Employees {
 	@Override
 	public String toString() {
 		return "Employees: [ Employee ID = " + id + ", Employee First Name = " + firstname + ", Employee Last Name = " + lastname + ", Employee Email = " + email
-				+ ", Employee Password = " + password + ", Title = " + title + " ]";
+				+ ", Employee Password = " + password + ", Title = " + title + ", Manager ID: "+ managerID+ ", Porifle Pic:"+ img + " ]";
 	}
 	
 	
