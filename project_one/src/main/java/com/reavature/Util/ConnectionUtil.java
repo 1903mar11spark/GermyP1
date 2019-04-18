@@ -16,6 +16,7 @@ public class ConnectionUtil {
 	Connection con = null;
     ResultSet rs = null; 
     PreparedStatement ps = null;
+	Connection  connection;
     
     public static Connection getConnection() throws SQLException {
 		String url = "";

@@ -175,3 +175,12 @@ function goBack() {
 	  window.history.back();
 	}
 
+function getUser(){
+	fetch('http://localhost:8089/project_one/home.html/HomeServlet')
+	  .then(function(response) {
+	    return response.json();
+	  })
+	  .then(function(myJson) {
+	    console.log(JSON.stringify(myJson));
+	  });
+}
