@@ -1,16 +1,17 @@
 package com.revature.Beans;
 
+import java.text.NumberFormat;
+
 public class ReimbursementsReq {
 	
 	private Integer rID;
-	private Integer amount;
+	private Double amount;
 	private String status;
 	private String img;
 	private Integer eID;
 	private String firstname;
 	private String lastname;
 	private String email;
-	private String title;
 	private Integer managerID;
 	
 	
@@ -24,8 +25,8 @@ public class ReimbursementsReq {
 
 
 
-	public ReimbursementsReq(Integer rID, Integer amount, String status, String img, Integer eID, String firstname,
-			String lastname, String email, String title, Integer managerID) {
+	public ReimbursementsReq(Integer rID, String status, String img, Double amount, Integer eID, String firstname,
+			String lastname, String email, Integer managerID) {
 		super();
 		this.rID = rID;
 		this.amount = amount;
@@ -35,7 +36,6 @@ public class ReimbursementsReq {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
-		this.title = title;
 		this.managerID = managerID;
 	}
 
@@ -56,14 +56,14 @@ public class ReimbursementsReq {
 
 
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
 
 
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
@@ -152,22 +152,6 @@ public class ReimbursementsReq {
 	}
 
 
-
-
-	public String getTitle() {
-		return title;
-	}
-
-
-
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-
-
 	public Integer getManagerID() {
 		return managerID;
 	}
@@ -184,9 +168,10 @@ public class ReimbursementsReq {
 
 	@Override
 	public String toString() {
-		return "ReimbursementsReq [rID=" + rID + ", amount=" + amount + ", status=" + status + ", img=" + img + ", eID="
-				+ eID + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", title=" + title
-				+ ", managerID=" + managerID + "]";
+		NumberFormat format =  NumberFormat.getCurrencyInstance();
+		
+		return "Reimbursement Requests: [ Reimbursement ID = " + rID + ", Amount = " + format.format(amount) + ", Reimbursement Status = " + status + ", Employee = "
+				+ eID + ", First Name = " + firstname + ", Last Name = " + lastname + ", Email = " + email + ", Manager's ID = " + managerID + " , Image = " + img +" ]";
 	}
 	
 	
