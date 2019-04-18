@@ -3,35 +3,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  	<script type="text/javascript" src="main.js"></script>
 </head>
-<body>
-<form action = "add">
-Enter 1st number : <input type = "text" name = "num1"><br>
-Enter 2nd number : <input type = "text" name = "num2"><br>
-<input type = "submit">
-</form>
+<body background = "img/bg1.jpeg">
 
-<div class="container">
-  <h2>Employee Log-in</h2>
-  <form action="/action_page.php">
+
+<div class="container" id = "testing">
+  <h2><font color = "white">Employee Log-in</font></h2>
+  <form action="homeServlet" method = "post" name = "loginForm">
+  
     <div class="form-group">
-      <label for="email">Email:</label>
+      <label for="email"><font color = "white">Email:</font></label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
     </div>
+    
     <div class="form-group">
-      <label for="pwd">Password:</label>
+      <label for="pwd"><font color = "white">Password:</font></label>
       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+      <label><input type="checkbox" name="remember"><font color = "white"> Remember me</font></label>
     </div>
     
-    <button type="submit" class="btn btn-primary col-md-4" style="background-color : red;">Submit</button>
-    <button id="register" type="button" class="btn btn-primary col-md-4" onClick=Register()>Haven't Registered?</button>
+    <button type="submit" class="btn btn-primary col-md-4" onClick = Login() >Submit</button>
+    <button id="register" type="button" class="btn btn-primary col-md-4" onClick = NewUser()>New User</button>
   </form>
 </div>
+
+
 </body>
 </html>

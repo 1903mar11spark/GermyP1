@@ -6,6 +6,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/add</url-pattern>
+    <url-pattern>/homeServlet</url-pattern>
   </servlet-mapping>
 </web-app>

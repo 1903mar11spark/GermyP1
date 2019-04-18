@@ -15,16 +15,18 @@ public class ConnectionUtil {
 	String plug = "/project_one/resources/Connections.properties";
 	Connection con = null;
     ResultSet rs = null; 
-    PreparedStatement ps =null;
+    PreparedStatement ps = null;
+    
 	public ConnectionUtil() {
-    try { 
-    Connection con = getConnectionFromFile(plug);
-	System.out.println(con);
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
-}
+		
+	    try { 
+	    Connection con = getConnectionFromFile(plug);
+		System.out.println(con);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
     
 	public static Connection getConnectionFromFile(String filename) throws SQLException, IOException {
