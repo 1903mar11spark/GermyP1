@@ -42,8 +42,8 @@ public class NewUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String pass = request.getParameter("password");
-		String first = request.getParameter("firstname");
-		String last = request.getParameter("lastname");
+		String first = request.getParameter("first");
+		String last = request.getParameter("last");
 		NewUserService register = new NewUserService();
 		register.CreateUser(first, last, email, pass);
 		

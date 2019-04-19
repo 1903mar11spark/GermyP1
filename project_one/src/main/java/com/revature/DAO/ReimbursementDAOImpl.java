@@ -21,7 +21,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		PreparedStatement smt = null;
 		ResultSet rs = null;
 		
-		try (Connection con = ConnectionUtil.getConnectionFromFile(plug)) 
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		{
 			smt = con.prepareStatement("INSERT INTO REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL ) "
 																+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
@@ -58,7 +58,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		
-		try  (Connection con = ConnectionUtil.getConnectionFromFile(plug))
+		try  (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
 			smt = con.prepareStatement("SELECT FROM REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL ) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");

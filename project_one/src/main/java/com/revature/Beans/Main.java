@@ -24,7 +24,7 @@ public class Main {
 			}
 		  try 
 		  { 
-		  Connection con = ConnectionUtil.getConnectionFromFile("Connections.properties");
+		  Connection con = ConnectionUtil.getConnectionFromFile();
 		  System.out.println(con); 
 		  }
 		  catch (SQLException e) 

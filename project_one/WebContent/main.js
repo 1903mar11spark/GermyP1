@@ -5,27 +5,29 @@ function Login()
 {	//http://localhost:8089/project_one/HomeServlet
 	let authentication = {email : document.getElementById("email").value, pass : document.getElementById("pwd").value}
 	let data = JSON.stringify(authentication);
-	
-	fetch('http://localhost:8089/project_one/HomeServlet', {
+	let homurl = 'http://localhost:8089/project_one/home';
+	fetch(homeurl, {
 	    method: 'POST',
-	    headers: {'Content-Type': 'application/json'},
+	    headers: { "Accept": "application/json",'Content-Type': 'application/json'},
 	    body: JSON.stringify({
 	        email: document.getElementById("email").value,
 	        password: document.getElementById("pwd").value
 	    })
+	}).then( (response) => {
+		return response.json();
 	})
-	.then(data => data.json() )
+	
 	.then(data =>  { 
-
 	    if(data.response){
 	    	console.log(data);
-	        redirect: window.location.replace(EmployeeView) 
+	        redirect: window.location.replace(EmployeeView()) 
 	    } else{
 	        alert("Invalid Email or Password");
 	    }
 	}) 
-	.catch((err) => {
-	    console.error(err);
+	.catch((error) => {
+		alert('oh no :(');
+	    console.log(error);
 	})
 	//EmployeeView();
 }
@@ -34,18 +36,18 @@ function Register(){
 	document.getElementById("testing").innerHTML = `
 	<div>
 
-	<form class="needs-validation" novalidate>
+	<form class="needs-validation" novalidate id = "addPost">
   <div class="form-row">
     <div class="col-md-4 mb-3">
       <label for="validationCustom01" ><font color = "white">First name</font></label>
-      <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Germy" required>
+      <input type="text" class="form-control" id="name1" placeholder="First name" value="Germy" required>
       <div class="valid-feedback">
          <font color = "green">Looks good! </font>
       </div>
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationCustom02"><font color = "white">Last name</font></label>
-      <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Louis" required>
+      <input type="text" class="form-control" id="name2" placeholder="Last name" value="Louis" required>
       <div class="valid-feedback">
         <font color = "green">Looks good! </font>
       </div>
@@ -53,26 +55,51 @@ function Register(){
 	
 	<div class="form-group">
     <label for="exampleInputEmail1"><font color = "white">Email address</font></label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1"><font color = "white">Password</font></label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="password" class="form-control" id="word" placeholder="Password">
   </div>
 	 
 		<div class="custom-file">
 		<input type="file" class="custom-file-input" id="customFile">
 		<label class="custom-file-label" for="customFile">Choose Profile Picture</label>
 		</div>
+		<button type="submit" class="btn btn-primary method = "POST">Submit</button>
 	</form>
 	
 		
 		
 		
-		<button type="submit" class="btn btn-primary">Submit</button>
+		
 		</div>
+		
 	`
+		document.getElementById('addPost').addEventListener('submit', newUser)
+		function newUser(e){
+		e.preventDefault();
+		let first = document.getElementById("name1").value;
+		let last = document.getElementById("name2").value;
+		let email = document.getElementById("mail").value;
+		let pass = document.getElementById("word").value;
+	    fetch("http://localhost:8089/project_one/NewUserServlet", {method: "POST", headers:{"Accept":"application/json"},
+	    	body: JSON.stringify({first:name1,last:name2,email:mail,pass:word})})
+	    //define behavior when response returns
+	    .then((response)=> {
+	        //return unwrapped promise obj for the next chained op
+	        return response.json();
+	        //console.log(response.json());
+	    })
+	    //utilize unwrapped promise as js obj
+	    .then((data) => {
+	        console.log(data);
+	    }).catch((error) => {
+			alert('Error: New User Fetch :(');
+		    console.log(error);
+		})
+	}
 }
 
 

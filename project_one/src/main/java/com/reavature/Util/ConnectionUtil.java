@@ -13,65 +13,35 @@ import java.util.Properties;
 public class ConnectionUtil {
 	//
 	static String plug = "Connections.properties";
-	Connection con = null;
-    ResultSet rs = null; 
-    PreparedStatement ps = null;
-	Connection  connection;
 
-	public static Connection getConnectionFromFile(String file) throws SQLException, IOException {
-		Properties prop = new Properties();
-		InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream(file);
-		prop.load(in);
+
+	public static Connection getConnection() throws SQLException {
+		String url = "";
+		String username = "";
+		String pass = "";
 		try {
-			   Class.forName("oracle.jdbc.driver.OracleDriver");
+			   Class.forName("oracle.jdbc.OracleDriver");
 			}
 			catch(ClassNotFoundException ex) {
+			   System.out.println("Error: unable to load driver classsss!");
+			}
+		return DriverManager.getConnection(url, username, pass);
+}
+	public static Connection getConnectionFromFile() throws SQLException, IOException {
+		Properties prop = new Properties();
+		InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream("Connections.properties");
+		prop.load(in);
+		try {
+			   Class.forName("oracle.jdbc.OracleDriver");
+			}
+			catch(ClassNotFoundException ex) {
+				ex.printStackTrace();
 			   System.out.println("Error: unable to load driver class!");
 			}
 		
-		return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"),
-				prop.getProperty("pass"));
+		return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"),
+				prop.getProperty("password"));
 }
 	
-	
-	public void Disconnect() {
 
-        try {
-            rs.close();
-            ps.close();
-            con.close();
-            
-        }                                            
-        catch (Exception ex) {
-            System.out.println("The following error has occured: " + ex.getMessage());
-        }  
-    }
-
-    public ResultSet ReadRecords(String sql) {
-        try {
-
-            ps = con.prepareStatement(sql);
-                                    
-            rs = ps.executeQuery(sql);
-
-            return rs;
-
-        } 
-        catch (SQLException e) {
-            System.out.println("The following error has occured: " + e.getMessage());
-        }                                                    
-
-        return rs;
-    }
-
-    public void ExecuteStatement(String sql) {
-        try {
-            ps = con.prepareStatement(sql);
-                                    
-            ps.executeUpdate(sql);
-        } 
-        catch (SQLException e) {
-            System.out.println("The following error has occured: " + e.getMessage());
-        }
-}
 }

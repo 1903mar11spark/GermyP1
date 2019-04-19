@@ -16,7 +16,7 @@ public class NewUserDAOImpl implements NewUserDAO {
        
         
         //Some exception handling with connecting to a file.
-		try ( Connection con = ConnectionUtil.getConnectionFromFile(plug)) {
+		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
 			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS) VALUES (?,?,?,?)");
@@ -45,7 +45,7 @@ public class NewUserDAOImpl implements NewUserDAO {
        
         
         //Some exception handling with connecting to a file.
-		try ( Connection con = ConnectionUtil.getConnectionFromFile(plug)) {
+		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
 			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, IMG) VALUES (?,?,?,?,?)");

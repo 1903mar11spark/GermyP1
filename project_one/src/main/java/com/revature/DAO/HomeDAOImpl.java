@@ -21,7 +21,7 @@ public class HomeDAOImpl implements HomeDAO {
 		boolean validate = false;
 		
 		
-		try (Connection con = ConnectionUtil.getConnectionFromFile(plug))
+		try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
 			smt = con.prepareStatement("SELECT EMAIL, PASS FROM EMPLOYEES  WHERE EMAIL = ? AND PASS = ? ");
 		    smt.setString(1, email);
@@ -52,7 +52,7 @@ public class HomeDAOImpl implements HomeDAO {
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		
-		 try (Connection con = ConnectionUtil.getConnectionFromFile(plug))
+		 try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
 			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL ) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
@@ -91,7 +91,7 @@ public class HomeDAOImpl implements HomeDAO {
 		ResultSet rs = null;
 		String first = "", last = "", mail = "", password = "", title = "", img = ""; 
 		Integer eID = 0, mID = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(plug)) 
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		  { 
 		  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, IMG, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ? AND PASS = ?");
 		  stmt.setString(1, email);
