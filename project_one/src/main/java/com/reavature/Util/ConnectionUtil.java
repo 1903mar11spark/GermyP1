@@ -17,23 +17,10 @@ public class ConnectionUtil {
     ResultSet rs = null; 
     PreparedStatement ps = null;
 	Connection  connection;
-    
-    public static Connection getConnection() throws SQLException {
-		String url = "";
-		String username = "";
-		String pass = "";
-		try {
-			   Class.forName("oracle.jdbc.driver.OracleDriver");
-			}
-			catch(ClassNotFoundException ex) {
-			   System.out.println("Error: unable to load driver class!");
-			}
-		return DriverManager.getConnection(url, username, pass);
-	}
 
-	public static Connection getConnectionFromFile() throws SQLException, IOException {
+	public static Connection getConnectionFromFile(String file) throws SQLException, IOException {
 		Properties prop = new Properties();
-		InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream(plug);
+		InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream(file);
 		prop.load(in);
 		try {
 			   Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -41,6 +28,7 @@ public class ConnectionUtil {
 			catch(ClassNotFoundException ex) {
 			   System.out.println("Error: unable to load driver class!");
 			}
+		
 		return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"),
 				prop.getProperty("pass"));
 }

@@ -2,10 +2,77 @@
  * 
  */
 function Login()
-{
+{	//http://localhost:8089/project_one/HomeServlet
 	let authentication = {email : document.getElementById("email").value, pass : document.getElementById("pwd").value}
+	let data = JSON.stringify(authentication);
+	
+	fetch('http://localhost:8089/project_one/HomeServlet', {
+	    method: 'POST',
+	    headers: {'Content-Type': 'application/json'},
+	    body: JSON.stringify({
+	        email: document.getElementById("email").value,
+	        password: document.getElementById("pwd").value
+	    })
+	})
+	.then(data => data.json() )
+	.then(data =>  { 
 
-	EmployeeView();
+	    if(data.response){
+	    	console.log(data);
+	        redirect: window.location.replace(EmployeeView) 
+	    } else{
+	        alert("Invalid Email or Password");
+	    }
+	}) 
+	.catch((err) => {
+	    console.error(err);
+	})
+	//EmployeeView();
+}
+
+function Register(){
+	document.getElementById("testing").innerHTML = `
+	<div>
+
+	<form class="needs-validation" novalidate>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom01" ><font color = "white">First name</font></label>
+      <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Germy" required>
+      <div class="valid-feedback">
+         <font color = "green">Looks good! </font>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02"><font color = "white">Last name</font></label>
+      <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Louis" required>
+      <div class="valid-feedback">
+        <font color = "green">Looks good! </font>
+      </div>
+    </div>
+	
+	<div class="form-group">
+    <label for="exampleInputEmail1"><font color = "white">Email address</font></label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1"><font color = "white">Password</font></label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+	 
+		<div class="custom-file">
+		<input type="file" class="custom-file-input" id="customFile">
+		<label class="custom-file-label" for="customFile">Choose Profile Picture</label>
+		</div>
+	</form>
+	
+		
+		
+		
+		<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	`
 }
 
 
@@ -176,7 +243,7 @@ function goBack() {
 	}
 
 function getUser(){
-	fetch('http://localhost:8089/project_one/home.html/HomeServlet')
+	fetch('http://localhost:8089/project_one/HomeServlet')
 	  .then(function(response) {
 	    return response.json();
 	  })
@@ -184,3 +251,20 @@ function getUser(){
 	    console.log(JSON.stringify(myJson));
 	  });
 }
+(function() {
+	  'use strict';
+	  window.addEventListener('load', function() {
+	    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	    var forms = document.getElementsByClassName('needs-validation');
+	    // Loop over them and prevent submission
+	    var validation = Array.prototype.filter.call(forms, function(form) {
+	      form.addEventListener('submit', function(event) {
+	        if (form.checkValidity() === false) {
+	          event.preventDefault();
+	          event.stopPropagation();
+	        }
+	        form.classList.add('was-validated');
+	      }, false);
+	    });
+	  }, false);
+	})();

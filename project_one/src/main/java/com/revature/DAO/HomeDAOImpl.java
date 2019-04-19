@@ -13,7 +13,7 @@ import com.revature.Beans.Employees;
 import com.revature.Beans.ReimbursementsReq;
 
 public class HomeDAOImpl implements HomeDAO {
-
+	String plug = "Connections.properties";
 	@Override
 	public boolean FindEmployee(String email, String pass) {
 		ResultSet rs = null;
@@ -21,9 +21,9 @@ public class HomeDAOImpl implements HomeDAO {
 		boolean validate = false;
 		
 		
-		try 
+		try (Connection con = ConnectionUtil.getConnectionFromFile(plug))
 		  { 
-			smt = ConnectionUtil.getConnection().prepareStatement("SELECT EMAIL, PASS FROM EMPLOYEES  WHERE EMAIL = ? AND PASS = ? ");
+			smt = con.prepareStatement("SELECT EMAIL, PASS FROM EMPLOYEES  WHERE EMAIL = ? AND PASS = ? ");
 		    smt.setString(1, email);
 		    smt.setString(2,pass);
 		    rs = smt.executeQuery();
@@ -37,7 +37,10 @@ public class HomeDAOImpl implements HomeDAO {
 					
 			  
 		  }catch (SQLException e) 
-				  {e.printStackTrace();}
+				  {e.printStackTrace();} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		  
 		return validate;
 	}
@@ -46,13 +49,12 @@ public class HomeDAOImpl implements HomeDAO {
 	public List<Employees> AllEmployees(Employees emp) {
 		// TODO Auto-generated method stub
 		List<Employees> all = new ArrayList<>();
-		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		
-		try 
+		 try (Connection con = ConnectionUtil.getConnectionFromFile(plug))
 		  { 
-			smt = ConnectionUtil.getConnection().prepareStatement("SELECT FROM EMPLOYEES  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL ) "
+			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL ) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
 		    rs = smt.executeQuery();
 		   
@@ -72,13 +74,61 @@ public class HomeDAOImpl implements HomeDAO {
 		  catch (SQLException e) 
 		  { 
 			  e.printStackTrace(); 
-		  }finally {
+		  } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
 			    try { rs.close(); } catch (Exception e) { /* ignored */ }
-			    try { con.close(); } catch (Exception e) { /* ignored */ }
 			}
 		
 		return all;
 	}
+
+	@Override
+	public Employees getEmployee(String email, String pass) {
+		PreparedStatement stmt = null ;
+		
+		ResultSet rs = null;
+		String first = "", last = "", mail = "", password = "", title = "", img = ""; 
+		Integer eID = 0, mID = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(plug)) 
+		  { 
+		  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, IMG, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ? AND PASS = ?");
+		  stmt.setString(1, email);
+		  stmt.setString(2, pass);
+		  
+		  
+			 rs = stmt.executeQuery();
+			 while (rs.next()) {
+					 eID = rs.getInt("EMPLOYEE_ID");
+					 first = rs.getString("FIRSTNAME");
+					 last = rs.getString("LASTNAME");
+					 mail = rs.getString("EMAIL");
+					 password = rs.getString("PASS");
+					 title = rs.getString("TITLE");
+					 img = rs.getString("img");
+					 mID = rs.getInt("MANAGER_ID");
+		  }
+		  }
+		  catch (SQLException e) 
+		  { 
+			  e.printStackTrace(); 
+		  }
+		  catch (IOException e) 
+		  {
+			  e.printStackTrace(); 
+		  }
+		catch (NullPointerException e) 
+		  { 
+			  e.printStackTrace(); 
+		  }
+		finally {
+		    try { rs.close(); } catch (Exception e) { /* ignored */ }
+		}
+			Employees emp = new Employees(eID,first,last,mail,password,title,img,mID);
+			return emp;		
+}
+	
 
 	
 	

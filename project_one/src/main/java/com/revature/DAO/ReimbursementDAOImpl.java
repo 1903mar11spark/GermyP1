@@ -14,16 +14,16 @@ import com.reavature.Util.ConnectionUtil;
 import com.revature.Beans.ReimbursementsReq;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO {
-
+	String plug = "Connections.properties";
+	
 	@Override
 	public void submitService(ReimbursementsReq req) {
-		// TODO Auto-generated method stub
-		//ConnectionUtil con = new ConnectionUtil();
 		PreparedStatement smt = null;
 		ResultSet rs = null;
 		
-		try {
-			smt = ConnectionUtil.getConnection().prepareStatement("INSERT INTO REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL ) "
+		try (Connection con = ConnectionUtil.getConnectionFromFile(plug)) 
+		{
+			smt = con.prepareStatement("INSERT INTO REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL ) "
 																+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
 			smt.setString(1, req.getStatus());
 			smt.setString(2, req.getImg());
@@ -39,6 +39,9 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		} catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
             System.exit(1);  
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 	}
 
@@ -49,18 +52,17 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public ArrayList<ReimbursementsReq> viewReimbursements() {
+	public List<ReimbursementsReq> viewReimbursements() {
 		// TODO Auto-generated method stub
-		ArrayList<ReimbursementsReq> views = new ArrayList();
-		Connection con = null;
+		ArrayList<ReimbursementsReq> views = new ArrayList<>();
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		
-		try 
+		try  (Connection con = ConnectionUtil.getConnectionFromFile(plug))
 		  { 
-			smt = ConnectionUtil.getConnection().prepareStatement("SELECT FROM REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL ) "
+			smt = con.prepareStatement("SELECT FROM REIMBURSEMENTS  (STATUS, IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL ) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
-		   rs = smt.executeQuery();
+		    rs = smt.executeQuery();
 		   
 				while (rs.next()) {
 					int rID = rs.getInt("R_ID");
@@ -78,9 +80,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		  catch (SQLException e) 
 		  { 
 			  e.printStackTrace(); 
-		  }finally {
+		  } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
 			    try { rs.close(); } catch (Exception e) { /* ignored */ }
-			    try { con.close(); } catch (Exception e) { /* ignored */ }
 			}
 		
 		return views;
