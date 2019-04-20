@@ -11,16 +11,15 @@ function Login(){
 	   
 	   
 	   let authentication = JSON.stringify(loginData);
-	 	console.log(loginData)
+	 	//console.log(logtainData)
 	   let xhr = new XMLHttpRequest();
-	   EmployeeView();
+	   
 	   xhr.onload =()=>{
 		   
 		   console.log("in xhr")
-		   console.log(xhr.responseText + "Login ajax")
+		  
 		   let info = JSON.parse(xhr.responseText);
-		   console.log(info + " data" )
-		   console.log("onload id is " + info );
+		
 		   
 //		   if(info.position === "Employee"){
 //			   
@@ -34,11 +33,10 @@ function Login(){
 	   xhr.onError = ()=>{
 		   console.log('Error')
 	   }
-	   xhr.open("POST","http://localhost:8089/com.servlets/home");
+	   xhr.open("POST","http://localhost:8089/project_one/home");
 	   console.log(xhr.responseText + "Login ajax")
 	   console.log(authentication);
 	   xhr.send(authentication);
-
 		}
 		
 

@@ -41,16 +41,17 @@ public class HomeServlet extends HttpServlet {
 			HomeService home = new HomeService();
 			Employees e = home.getDAOEmployee(email, password);
 			
-			if (home.validateEmployee(email, password) == false) {
+			if (home.validateEmployee(email, password)) {
 				
-				
-				session.setAttribute("userId", e.getId());
+				System.out.println(home.validateEmployee(email, password));
+				session.setAttribute("employee", e.getId());
 				session.setAttribute("email", e.getEmail());
 				session.setAttribute("firstname", e.getFirstname());
 				session.setAttribute("lastname", e.getLastname());
-				res.sendRedirect("home");
+				res.sendRedirect("ProfileServlet");
 			}else {
 				//otherwise redirect to login page
+				System.out.println(home.validateEmployee(email, password));
 				res.sendRedirect("home");
 			}
 			

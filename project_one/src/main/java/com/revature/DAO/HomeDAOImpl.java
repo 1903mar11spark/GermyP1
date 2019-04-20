@@ -20,7 +20,7 @@ public class HomeDAOImpl implements HomeDAO {
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		boolean validate = false;
-		
+		String valemail = null, valpass = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
@@ -29,10 +29,17 @@ public class HomeDAOImpl implements HomeDAO {
 		    smt.setString(2,pass);
 		    rs = smt.executeQuery();
 		    
-		    if (!rs.next()) {
-				  System.out.println("Wrong Username and Password.");
+		    while(rs.next()) {
+		    	valemail = rs.getString("EMAIL");
+		    	valpass = rs.getString("PASS");
+		    }
+		    if (valemail == null || valpass == null) {
+				  System.out.println("Wrong Username and Password.(HomeDAOImpl, Method - Find Employee)");
+				  validate = false;
+				  return validate;
 				 } 
 				  else {
+					  System.out.println("Correct Username and Password! WOOHOOO (HomeDAOImpl, Method - Find Employee)");
 					  validate = true;
 					   }
 					
