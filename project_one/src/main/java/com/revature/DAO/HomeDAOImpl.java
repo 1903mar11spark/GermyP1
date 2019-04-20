@@ -1,6 +1,7 @@
 package com.revature.DAO;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,7 +66,7 @@ public class HomeDAOImpl implements HomeDAO {
 					String email = rs.getString("EMAIL");
 					String pass = rs.getString("PASS");
 					String title = rs.getString("TITLE");
-					String img = rs.getString("img");
+					InputStream img = rs.getBinaryStream("img");
 					int mID = rs.getInt("MANAGER_ID");
 					
 					all.add(new Employees(eID, first, last, email, pass, title, img, mID));
@@ -89,7 +90,9 @@ public class HomeDAOImpl implements HomeDAO {
 		PreparedStatement stmt = null ;
 		
 		ResultSet rs = null;
-		String first = "", last = "", mail = "", password = "", title = "", img = ""; 
+		String first = "", last = "", mail = "", password = "", title = "";
+		//check
+		InputStream img = null;
 		Integer eID = 0, mID = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		  { 
@@ -106,7 +109,7 @@ public class HomeDAOImpl implements HomeDAO {
 					 mail = rs.getString("EMAIL");
 					 password = rs.getString("PASS");
 					 title = rs.getString("TITLE");
-					 img = rs.getString("img");
+					 img = rs.getBinaryStream("img");
 					 mID = rs.getInt("MANAGER_ID");
 		  }
 		  }

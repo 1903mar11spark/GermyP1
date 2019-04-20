@@ -1,5 +1,7 @@
 package com.revature.Beans;
 
+import java.io.InputStream;
+
 public class Employees {
 
 	private Integer id;
@@ -8,7 +10,7 @@ public class Employees {
 	private String email;
 	private String password;
 	private String title;
-	private String img;
+	private InputStream img;
 	private Integer managerID = null;
 	
 
@@ -30,7 +32,7 @@ public class Employees {
 	
 
 	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
-			String img, Integer managerID) {
+			InputStream img, Integer managerID) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -43,7 +45,7 @@ public class Employees {
 	}
 
 	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
-			String img) {
+			InputStream img) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -53,11 +55,11 @@ public class Employees {
 		this.title = title;
 		this.img = img;
 	}
-	public String getImg() {
+	public InputStream getImg() {
 		return img;
 	}
 
-	public void setImg(String img) {
+	public void setImg(InputStream img) {
 		this.img = img;
 	
 	}

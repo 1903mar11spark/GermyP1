@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.sql.Blob;
 import com.revature.Service.NewUserService;
 
 /**
@@ -32,7 +33,6 @@ public class NewUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/home").forward(request, response);
 		
-			    response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -41,16 +41,19 @@ public class NewUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
-		String pass = request.getParameter("password");
+		String pass = request.getParameter("pass");
 		String first = request.getParameter("first");
 		String last = request.getParameter("last");
+		
+		if (email != null && pass != null && first != null && last != null) {
 		NewUserService register = new NewUserService();
 		register.CreateUser(first, last, email, pass);
-		
-			RequestDispatcher dispatcher = getServletContext()
-			      .getRequestDispatcher("/home");
-			dispatcher.forward(request, response);	
-		doGet(request, response);
+		System.out.println("success" + email);
+		response.sendRedirect("/home");
+		}else {
+			System.out.println("New User Empty");
+			response.sendRedirect("/NewUserServlet");
+		}
 	}
 
 }

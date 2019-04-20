@@ -25,7 +25,7 @@ public class NewUserDAOImpl implements NewUserDAO {
 			stmt.setString(3, email);
 			stmt.setString(4, pass);
 			
-		    stmt.execute();
+		    stmt.executeUpdate();
 		    
 		    
            //More exception handling.
