@@ -16,7 +16,7 @@ function Login(){
 	   
 	   xhr.onload =()=>{
 		   
-		   console.log("in xhr")
+		   console.log(authentication)
 		  
 		   let info = JSON.parse(xhr.responseText);
 		
@@ -43,76 +43,42 @@ function Login(){
 
 function Register(){
 	console.log("register function");
-	document.getElementById("testing").innerHTML = `
-	<div>
+	
+	window.open("http://localhost:8089/project_one/NewUser.html","_self")
 
-	<form class="needs-validation" novalidate id = "addPost" action = "NewUserServlet" method = "POST">
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationCustom01" ><font color = "white">First name</font></label>
-      
-      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "first">
-      <div class="valid-feedback">
-         <font color = "green">Looks good! </font>
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationCustom02"><font color = "white">Last name</font></label>
-      
-      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "last">
-      <div class="valid-feedback">
-        <font color = "green">Looks good! </font>
-      </div>
-    </div>
+    //return false;
 	
-	<div class="form-group">
-    <label for="exampleInputEmail1"><font color = "white">Email address</font></label>
-    
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1"><font color = "white">Password</font></label>
-    
-    <input type="password" class="form-control" id="pass" placeholder="Password" name = "pass">
-  </div>
-	 
-		<div class="custom-file">
-		<input type="file" class="custom-file-input" id="customFile">
-		<label class="custom-file-label" for="customFile">Choose Profile Picture</label>
-		</div>
-		<button type="submit" class="btn btn-primary"  onClick = newUser()>Submit</button>
-	</form>
 	
-		
-		
-		
-		
-		</div>
-		
-	`
 		
 }
 	//	document.getElementById('sub').addEventListener('submit', newUser)
 		function newUser(){
 		console.log("new user")
 		//e.preventDefault();
-		let first = document.getElementById("first").value;
-		let last = document.getElementById("last").value;
-		let email = document.getElementById("email").value;
-		let pass = document.getElementById("pass").value;
-		console.log(pass);
-		let user = JSON.stringify({"first":first,"last":last,"email":email,"pass":pass});
-		console.log(user);
+		
+		let register ={
+		 first : document.getElementById("first").value,
+		 last : document.getElementById("last").value,
+		 email : document.getElementById("email").value,
+		 pass : document.getElementById("pass").value,
+		 mID : document.getElementById("managerID").value
+		}
+		
+		let newusers = JSON.stringify(register);
+		//console.log(newusers);
 		let xhr = new XMLHttpRequest();
-		xhr.open("POST", "http://localhost:8089/project_one/NewUserServlet");
-		xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
-	        console.log(xhr.responseText + "newUser function");
-		};
+		xhr.open("POST", "http://localhost:8089/project_one/NewUserServlet",true);
+		xhr.onload = () => {//console.log(xhr.responseText)
+	        //console.log(first);
+			
+		}
 		xhr.onerror = function() {
 		    console.log('Error');
 		}
-		xhr.send(user);
+		console.log(newusers);
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhr.overrideMimeType('application/xml');
+		xhr.send(JSON.stringify(newusers))
 		}
 		
 		

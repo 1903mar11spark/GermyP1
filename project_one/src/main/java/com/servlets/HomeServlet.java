@@ -48,7 +48,12 @@ public class HomeServlet extends HttpServlet {
 				session.setAttribute("email", e.getEmail());
 				session.setAttribute("firstname", e.getFirstname());
 				session.setAttribute("lastname", e.getLastname());
+				if(e.getManagerID() == null) {
 				res.sendRedirect("ProfileServlet");
+				}else {
+					res.sendRedirect("ManagerProfile");
+				}
+				
 			}else {
 				//otherwise redirect to login page
 				System.out.println(home.validateEmployee(email, password));

@@ -11,7 +11,7 @@ public class NewUserDAOImpl implements NewUserDAO {
 	String plug = "Connections.properties";
 
 	@Override
-	public void CreateUser(String first, String last, String email, String pass) {
+	public void CreateUser(String first, String last, String email, String pass, Integer mID) {
 		PreparedStatement stmt = null;
        
         
@@ -19,11 +19,12 @@ public class NewUserDAOImpl implements NewUserDAO {
 		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
-			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS) VALUES (?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, MANAGER_ID) VALUES (?,?,?,?,?)");
 			stmt.setString(1, first);
 			stmt.setString(2, last);
 			stmt.setString(3, email);
 			stmt.setString(4, pass);
+			stmt.setInt(5, 7);
 			
 		    stmt.executeUpdate();
 		    

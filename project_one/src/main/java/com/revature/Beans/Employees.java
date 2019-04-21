@@ -113,6 +113,14 @@ public class Employees {
 		this.title = title;
 	}
 	
+	public Integer getManagerID() {
+		return managerID;
+	}
+
+	public void setManagerID(Integer managerID) {
+		this.managerID = managerID;
+	}
+
 	@Override
 	public String toString() {
 		return "Employees: [ Employee ID = " + id + ", Employee First Name = " + firstname + ", Employee Last Name = " + lastname + ", Employee Email = " + email
