@@ -16,7 +16,6 @@ public class Employees {
 
 	public Employees() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Employees(String email, String password) {
@@ -61,6 +60,15 @@ public class Employees {
 		this.title = title;
 		this.img = img;
 	}
+	
+	public Employees(String firstname, String lastname, String email, String password) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.password = password;
+	}
+
 	public InputStream getImg() {
 		return img;
 	}

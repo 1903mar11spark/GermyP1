@@ -18,6 +18,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	
 	@Override
 	public void submitService(ReimbursementsReq req) {
+		
 		PreparedStatement smt = null;
 		ResultSet rs = null;
 		
@@ -53,7 +54,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
 	@Override
 	public List<ReimbursementsReq> viewReimbursements() {
-		// TODO Auto-generated method stub
+		// Create a list of reimbursements to print 
 		ArrayList<ReimbursementsReq> views = new ArrayList<>();
 		ResultSet rs = null;
 		PreparedStatement smt = null;

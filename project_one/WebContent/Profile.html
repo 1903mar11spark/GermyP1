@@ -2,18 +2,22 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Home Page</title>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href=css/styles.css>
 	<script type="text/javascript" src="main.js"></script>
 </head>
+
 <body background = "img/bg1.jpeg">
+
 <div class="container">
+
 		<h1><font color = "white">Employee Home Page </font> </h1>
 		</div>
 	
-			<div class="card text-center">
-			<div class="card-header">
+	<div class="card text-center">
+		<div class="card-header">
 
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,39 +33,145 @@
 		  <li class="nav-item">
 		    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false"> Update Info </a>
 		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" id="logout-tab" data-toggle="tab" href="#out" role="tab" aria-controls="out" aria-selected="false"> Log Out </a>
+		  </li>
 		</ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 500px;">Home</div>
-  
-  <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 500px;">
-  <button type="button" value = "Back" class="btn btn-dark" onclick="goBack()"> Go Back </button>
-		
-		
-		<h1>Upload Receipts</h1>
-  <center>
-        <form method="post" action="uploadFile" enctype="multipart/form-data">
-            Select file to upload:
-            <input type="file" name="uploadFile" id = "img" onchange="previewFile()" />
-            <br/><br/>
-            <input type="submit" value="Upload" />
-            <br><br>
-            <img src="" height="200" id = "pre" alt="Image preview...">
-        </form>
-    </center>
-  
-  
-  
+						<!-- Tab panes -->
+						
+						<!-- Home -->
+						
+						<div class="tab-content">
+						  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 500px;">
+						 <div class="card1" >
+						 <img src="img.jpg" alt="John" style="width:100%">
+						  <h1>John Doe</h1>
+						  <p class="title">CEO & Founder, Example</p>
+						  <p>Harvard University</p>
+						  <a href="#"><i class="fa fa-dribbble"></i></a>
+						  <a href="#"><i class="fa fa-twitter"></i></a>
+						  <a href="#"><i class="fa fa-linkedin"></i></a>
+						  <a href="#"><i class="fa fa-facebook"></i></a>
+						  <p><button>Contact</button></p>
+						</div>
+						  
+						  
+						  </div>
+						  
+						  <!-- Home -->
+						 
+						 <!-- Request Reimbursements -->
+						 
+						 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 500px;">
+						 <button type="button" value = "Back" class="btn btn-dark" onclick="goBack()"> Go Back </button>
+							
+							
+							<h1>Upload Receipts</h1>
+						 <center>
+						       <form method="post" action="uploadFile" enctype="multipart/form-data">
+						           Select file to upload:
+						           <input type="file" name="uploadFile" id = "img" onchange="previewFile()" />
+						           <br/><br/>
+						           <input type="submit" value="Upload" />
+						           <br><br>
+						           <img src="" height="200" id = "pre" alt="Image preview...">
+						       </form>
+						   </center>
+						 
+						 
+						 
+						 </div>
+						 
+						 <!-- Request Reimbursements -->
+						 
+						 <!-- View Reimbursements -->
+						 
+						 <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 500px;">
+						  <table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">First</th>
+						      <th scope="col">Last</th>
+						      <th scope="col">Handle</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>Mark</td>
+						      <td>Otto</td>
+						      <td>@mdo</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">2</th>
+						      <td>Jacob</td>
+						      <td>Thornton</td>
+						      <td>@fat</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">3</th>
+						      <td>Larry</td>
+						      <td>the Bird</td>
+						      <td>@twitter</td>
+						    </tr>
+						  </tbody>
+						</table>
+						  </div>
+						  
+						 <!-- View Reimbursements --> 
+						 
+						 <!-- Update Info -->
+						 
+						 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 500px;">
+									<form>
+						 <div class="form-group col-md-4 mb-3">
+						    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>
+						    
+						    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
+						    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+						  </div>
+						  <div class="form-group col-md-4 mb-3">
+						    <label for="exampleInputPassword1"><font color = "black">Password</font></label>
+						    
+						    <input type="password" class="form-control" id="pass" placeholder="Password" name = "pass">
+						    
+						  </div>
+						  
+						  <form>
+						   <div class="col-md-4 mb-3">
+						      <label for="validationCustom01" ><font color = "black">First name</font></label>
+						      
+						      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "first">
+						      <div class="valid-feedback">
+						         <font color = "green">Looks good! </font>
+						      </div>
+						    </div>
+						    <div class="col-md-4 mb-3">
+						      <label for="validationCustom02"><font color = "black">Last name</font></label>
+						      
+						      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "last">
+						      <div class="valid-feedback">
+						        <font color = "green">Looks good! </font>
+						      </div>
+						    </div>
+						</form>
+						 <div class="form-group form-check">
+						  <button type="submit" class="btn btn-primary form-control" onClick = updateEmployee() >Submit</button>
+						  </div>
+						</form>
+						  </div>
+						  
+						  <!-- Update Info -->
+						 
+						 <!-- LogOut -->
+						 
+						 <div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab" style = "height : 500px;">
+						 <button type="button" class="btn btn-danger" style = "float : right">Log-Out</button>
   </div>
+  						 <!-- LogOut -->
   
-  <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 500px;">
-  
-  </div>
-  
-  <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 500px;">
-			
-  </div>
   
 </div>
   </div>

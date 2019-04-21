@@ -17,6 +17,7 @@ public class HomeDAOImpl implements HomeDAO {
 	String plug = "Connections.properties";
 	@Override
 	public boolean FindEmployee(String email, String pass) {
+		//checks to see if there is a user in database with info matching parameters
 		ResultSet rs = null;
 		PreparedStatement smt = null;
 		boolean validate = false;
@@ -55,7 +56,7 @@ public class HomeDAOImpl implements HomeDAO {
 
 	@Override
 	public List<Employees> AllEmployees(Employees emp) {
-		// TODO Auto-generated method stub
+		//Create a list of employees form database to print out
 		List<Employees> all = new ArrayList<>();
 		ResultSet rs = null;
 		PreparedStatement smt = null;
@@ -93,9 +94,9 @@ public class HomeDAOImpl implements HomeDAO {
 	}
 
 	@Override
+	//Returns an employee and all its values
 	public Employees getEmployee(String email, String pass) {
 		PreparedStatement stmt = null ;
-		
 		ResultSet rs = null;
 		String first = "", last = "", mail = "", password = "", title = "";
 		//check
@@ -139,7 +140,66 @@ public class HomeDAOImpl implements HomeDAO {
 			return emp;		
 }
 	
-
+public void UpdateEmployee(Employees emp, String user) {
+	PreparedStatement stmt = null, stmt2 = null;
+	ResultSet rs = null;
+	String first = "", last = "", mail = "", password = "";
+	String tfirst = emp.getFirstname(), tlast = emp.getLastname(), tmail = emp.getEmail(), tpass = emp.getPassword();
+	
+	try (Connection con = ConnectionUtil.getConnectionFromFile()) 
+	  { 
+	  stmt = con.prepareStatement( "SELECT FIRSTNAME , LASTNAME, EMAIL,PASS FROM EMPLOYEES WHERE EMAIL = ?");
+	  stmt.setString(1, user);
+	  
+		 rs = stmt.executeQuery();
+		 while (rs.next()) {
+				 first = rs.getString("FIRSTNAME");
+				 last = rs.getString("LASTNAME");
+				 mail = rs.getString("EMAIL");
+				 password = rs.getString("PASS");
+	  }
+		 /*if the values that the user wanted to update are left null then the current value in the database is set to the temp vals
+		  * thus, no null values are accidentally replacing valid values in the sql statement*/
+		if(tfirst == null) {
+			 tfirst = first;
+		 }
+		if(tlast == null) {
+			tlast =	last;	 
+				 }
+		if(tmail == null) {
+			tmail = mail; 
+		}
+		if(tpass == null) {
+			 tpass = password;
+		}
+		
+		stmt2 = con.prepareStatement( "UPDATE EMPLOYEES SET FIRSTNAME = ? , LASTNAME = ?, EMAIL = ?, PASS = ?  WHERE EMAIL = ?");
+		  stmt2.setString(1, tfirst);
+		  stmt2.setString(2, tlast);
+		  stmt2.setString(3, tmail);
+		  stmt2.setString(4, tpass);
+		  stmt2.setString(5, user);
+		  
+		  
+		  stmt2.executeUpdate();
+		 System.out.println("Employee Updated");
+	  }
+	  catch (SQLException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	  catch (IOException e) 
+	  {
+		  e.printStackTrace(); 
+	  }
+	catch (NullPointerException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	finally {
+	    try { rs.close(); } catch (Exception e) { /* ignored */ }
+	}
+}
 	
 	
 }

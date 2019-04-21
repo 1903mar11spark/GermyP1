@@ -20,4 +20,10 @@ public class HomeService {
 		
 		return emp;
 	}
+	
+	public void UpdateEmployee(Employees emp, String user) {
+		HomeDAOImpl home = new HomeDAOImpl();
+		home.UpdateEmployee(emp, user);
+		System.out.println("Service Method Update Employee Called");
+	}
 }

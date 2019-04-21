@@ -12,11 +12,9 @@ public class NewUserDAOImpl implements NewUserDAO {
 
 	@Override
 	public void CreateUser(String first, String last, String email, String pass, Integer mID) {
+		//Create user called from NewUser Service class from NewUserServlet from xmlhttprequest in JS file after end user clicks submit in NewUser html
 		PreparedStatement stmt = null;
-       
-        
-        //Some exception handling with connecting to a file.
-		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
+      		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
 			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, MANAGER_ID) VALUES (?,?,?,?,?)");
@@ -24,7 +22,7 @@ public class NewUserDAOImpl implements NewUserDAO {
 			stmt.setString(2, last);
 			stmt.setString(3, email);
 			stmt.setString(4, pass);
-			stmt.setInt(5, 7);
+			stmt.setInt(5, mID);
 			
 		    stmt.executeUpdate();
 		    
@@ -39,7 +37,8 @@ public class NewUserDAOImpl implements NewUserDAO {
 				             	catch (Exception e) {System.exit(1);}
 }
 	}
-
+	
+	//If user uploads an image then this method should be called
 	@Override
 	public void CreateUser(String first, String last, String email, String pass, String img) {
 		PreparedStatement stmt = null;

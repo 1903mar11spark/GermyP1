@@ -46,14 +46,15 @@ public class NewUserServlet extends HttpServlet {
 	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String first = request.getParameter("first");//Keep getting null Values Here
+		//Called after end user clicks Submit in NewUser.html, xmlhttprequest sends data, redirects to same page if null values are passed
+		String first = request.getParameter("first");
 		String last = request.getParameter("last");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		String mID = request.getParameter("mID");
 		Integer newID;
 		
+		//if user chooses null has a manager ID to be a reg employee, I check value and parse if to Int if not null
 		System.out.println(first);
 		if (mID == null) {
 			 newID = null;
@@ -64,10 +65,10 @@ public class NewUserServlet extends HttpServlet {
 		if (email != null && pass != null && first != null && last != null) {
 		NewUserService register = new NewUserService();
 		register.CreateUser(first, last, email, pass,newID);
-		System.out.println("success" + email);
+		System.out.println("Testing if NewUserServlet Call is a Success: " + email);
 		response.sendRedirect("home");
 		}else {
-			System.out.println("New User Empty" +first + last);
+			System.out.println("New User Empty Check (NewUserServlet): " +first + last);
 			response.sendRedirect("NewUserServlet");
 		}
 	}

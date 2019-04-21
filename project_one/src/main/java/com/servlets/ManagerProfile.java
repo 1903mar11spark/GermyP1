@@ -19,14 +19,12 @@ public class ManagerProfile extends HttpServlet {
      */
     public ManagerProfile() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("ManagerView.html").forward(request, response);
 	}
@@ -35,7 +33,7 @@ public class ManagerProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Gets called if user manager id is not null. Redirect comes from HomeServlet. Logic is hsndled there.
 		doGet(request, response);
 	}
 

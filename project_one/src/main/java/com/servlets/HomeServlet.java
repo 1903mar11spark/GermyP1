@@ -34,28 +34,38 @@ public class HomeServlet extends HttpServlet {
 	}
 
 		protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-			//check if user exists and if manager id is null
 			String email = req.getParameter("email");
 			String password = req.getParameter("pwd");
+			//false param prevents the servlet from creating a new session if one does not already exist:
 			HttpSession session = req.getSession();
+			//Create HomeService obj to check for valid user. This method calls another Method in HomeDAOImpl
+			
 			HomeService home = new HomeService();
 			Employees e = home.getDAOEmployee(email, password);
 			
-			if (home.validateEmployee(email, password)) {
+			//If user valid set session attributes
+			System.out.println("CHECK POINT: " + email + e.getEmail());
+			
+			if ( e != null ) {
 				
 				System.out.println(home.validateEmployee(email, password));
-				session.setAttribute("employee", e.getId());
-				session.setAttribute("email", e.getEmail());
-				session.setAttribute("firstname", e.getFirstname());
-				session.setAttribute("lastname", e.getLastname());
-				if(e.getManagerID() == null) {
+				
+				//session.setAttribute("Employee", e.getId().toString());
+				session.setAttribute("Email", e.getEmail().toString());
+				session.setAttribute("First", e.getFirstname());
+				session.setAttribute("Last", e.getLastname());
+				session.setAttribute("Manager", e.getId().toString());
+				
+				if(e.getManagerID() == null || e.getManagerID() == 0) {
 				res.sendRedirect("ProfileServlet");
 				}else {
+					//if manager id is not null, redirect to home page
 					res.sendRedirect("ManagerProfile");
 				}
 				
 			}else {
-				//otherwise redirect to login page
+				
+				//if no user exists refresh page page
 				System.out.println(home.validateEmployee(email, password));
 				res.sendRedirect("home");
 			}
