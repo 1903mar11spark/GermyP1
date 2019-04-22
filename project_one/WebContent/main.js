@@ -74,17 +74,20 @@ function Register(){
 		}
 		
 function updateEmployee(){
-	let info = {
-			 first : document.getElementById("first").value,
-			 last : document.getElementById("last").value,
-			 email : document.getElementById("email").value,
-			 pass : document.getElementById("pass").value
-			 
-			}
-			
-			let update = JSON.stringify(info);
+	let firstname = document.getElementById("firstname").value;
+	let lastname = document.getElementById("lastname").value;
+	let email = document.getElementById("email").value;
+	let pass = document.getElementById("pass").value;
+	
+	
+	let info = JSON.stringify ({"firstname":firstname,"lastname":lastname,"email":email,"pass":pass});
+	var data = new FormData();
+	data.append('firstname', firstname);
+	data.append('lastname', lastname);
+	data.append('email', email);
+	data.append('pass', pass);
 			let xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8089/project_one/UpdateEmployeeServlet",true);
+			xhr.open("POST", "http://localhost:8089/project_one/UpdateEmployeeServlet");
 			xhr.onload = () => {//console.log(xhr.responseText)
 		        //console.log(first);
 				
@@ -92,12 +95,12 @@ function updateEmployee(){
 			xhr.onerror = function() {
 			    console.log('Error');
 			}
-			console.log(update);
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			//xhr.overrideMimeType('application/xml');
-			xhr.send(update)
+			console.log(data);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xhr.send(data)
+			
 }		
-	    	
+
 
 
 let newpic = "";

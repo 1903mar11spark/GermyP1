@@ -148,7 +148,7 @@ public void UpdateEmployee(Employees emp, String user) {
 	
 	try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 	  { 
-	  stmt = con.prepareStatement( "SELECT FIRSTNAME , LASTNAME, EMAIL,PASS FROM EMPLOYEES WHERE EMAIL = ?");
+	  stmt = con.prepareStatement( "SELECT FIRSTNAME, LASTNAME, EMAIL,PASS FROM EMPLOYEES WHERE EMAIL = ?");
 	  stmt.setString(1, user);
 	  
 		 rs = stmt.executeQuery();
@@ -160,16 +160,16 @@ public void UpdateEmployee(Employees emp, String user) {
 	  }
 		 /*if the values that the user wanted to update are left null then the current value in the database is set to the temp vals
 		  * thus, no null values are accidentally replacing valid values in the sql statement*/
-		if(tfirst == null) {
+		if(tfirst.equals(null)) {
 			 tfirst = first;
 		 }
-		if(tlast == null) {
+		if(tlast.equals("")) {
 			tlast =	last;	 
 				 }
-		if(tmail == null) {
+		if(tmail.equals("")) {
 			tmail = mail; 
 		}
-		if(tpass == null) {
+		if(tpass.equals("")) {
 			 tpass = password;
 		}
 		
@@ -182,7 +182,7 @@ public void UpdateEmployee(Employees emp, String user) {
 		  
 		  
 		  stmt2.executeUpdate();
-		 System.out.println("Employee Updated");
+		 System.out.println("Employee "+tfirst+" Updated");
 	  }
 	  catch (SQLException e) 
 	  { 

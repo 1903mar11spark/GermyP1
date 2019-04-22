@@ -125,7 +125,7 @@
 						 <!-- Update Info -->
 						 
 						 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 500px;">
-									<form>
+							<form method = "POST" action = "UpdateEmployeeServlet">	
 						 <div class="form-group col-md-4 mb-3">
 						    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>
 						    
@@ -139,11 +139,11 @@
 						    
 						  </div>
 						  
-						  <form>
+						  
 						   <div class="col-md-4 mb-3">
 						      <label for="validationCustom01" ><font color = "black">First name</font></label>
 						      
-						      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "first">
+						      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "firstname">
 						      <div class="valid-feedback">
 						         <font color = "green">Looks good! </font>
 						      </div>
@@ -151,17 +151,19 @@
 						    <div class="col-md-4 mb-3">
 						      <label for="validationCustom02"><font color = "black">Last name</font></label>
 						      
-						      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "last">
+						      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "lastname">
 						      <div class="valid-feedback">
 						        <font color = "green">Looks good! </font>
 						      </div>
 						    </div>
-						</form>
-						 <div class="form-group form-check">
+						     <div class="form-group form-check">
 						  <button type="submit" class="btn btn-primary form-control" onClick = updateEmployee() >Submit</button>
 						  </div>
 						</form>
-						  </div>
+						
+</div>
+						
+						  
 						  
 						  <!-- Update Info -->
 						 
