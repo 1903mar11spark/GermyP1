@@ -30,25 +30,24 @@ public class LogOutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 response.setContentType("text/html");  
-         PrintWriter out=response.getWriter();  
-           
-         request.getRequestDispatcher("home").include(request, response);  
-           
-         HttpSession session=request.getSession();  
-         session.invalidate();  
-           
-         out.print("You are successfully logged out!");  
-           
-         out.close();  
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		 
+		PrintWriter pw = response.getWriter();
+		request.getRequestDispatcher("home").include(request, response);
+		HttpSession session = request.getSession(false);
+		String button = request.getParameter("log");
+		if (session != null && button.equals("log") ) {
+			session.invalidate();
+		}
+		pw.println("<div class=\"display\"><p>You are successfully logged out</p></div>");
+		pw.println("<a href=\"home\">back to login</a>");
+		pw.println("</body></html>");
+		response.sendRedirect("home");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

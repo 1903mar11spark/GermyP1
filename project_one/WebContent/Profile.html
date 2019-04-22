@@ -157,7 +157,7 @@
 						      </div>
 						    </div>
 						     <div class="form-group form-check">
-						  <button type="submit" class="btn btn-primary form-control" onClick = updateEmployee() >Submit</button>
+						  <button type="submit" class="btn btn-primary form-control"  >Submit</button>
 						  </div>
 						</form>
 						
@@ -170,8 +170,11 @@
 						 <!-- LogOut -->
 						 
 						 <div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab" style = "height : 500px;">
-						 <button type="button" class="btn btn-danger" style = "float : right">Log-Out</button>
-  </div>
+						<form action="LogOutServlet" method="GET"> 
+						 <button type="submit" value="Logout" name = "log" class="btn btn-danger" style = "float : right">Log-Out</button>
+  						</form>
+  						</div>
+  					 	
   						 <!-- LogOut -->
   
   
