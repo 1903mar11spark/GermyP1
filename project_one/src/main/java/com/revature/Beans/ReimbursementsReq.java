@@ -1,18 +1,21 @@
 package com.revature.Beans;
 
+import java.sql.Blob;
 import java.text.NumberFormat;
 
 public class ReimbursementsReq {
 	
 	private Integer rID;
+	private String status = "Pending";
+	private Blob img;
 	private Double amount;
-	private String status;
-	private String img;
 	private Integer eID;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private Integer managerID;
+	private String description;
+	private String category;
 	
 	
 	
@@ -25,18 +28,123 @@ public class ReimbursementsReq {
 
 
 
-	public ReimbursementsReq(Integer rID, String status, String img, Double amount, Integer eID, String firstname,
-			String lastname, String email, Integer managerID) {
+	public ReimbursementsReq(Integer rID, String status, Double amount, Integer eID, String firstname, String lastname,
+			String email, Integer managerID, String description) {
 		super();
 		this.rID = rID;
-		this.amount = amount;
 		this.status = status;
-		this.img = img;
+		this.amount = amount;
 		this.eID = eID;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.managerID = managerID;
+		this.description = description;
+	}
+
+
+
+
+	public ReimbursementsReq(Double amount, String firstname, String lastname, String email, Integer managerID,
+			String description, String category) {
+		super();
+		this.amount = amount;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.managerID = managerID;
+		this.description = description;
+		this.category = category;
+	}
+
+
+
+
+	public ReimbursementsReq(Double amount, Integer eID, String firstname, String lastname, String email,
+			Integer managerID, String description, String category) {
+		super();
+		this.amount = amount;
+		this.eID = eID;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.managerID = managerID;
+		this.description = description;
+		this.category = category;
+	}
+
+
+
+
+	public ReimbursementsReq(Blob img, Double amount, Integer eID, String firstname, String lastname, String email,
+			Integer managerID, String description, String category) {
+		super();
+		this.img = img;
+		this.amount = amount;
+		this.eID = eID;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.managerID = managerID;
+		this.description = description;
+		this.category = category;
+	}
+
+
+
+
+	public ReimbursementsReq(String status, Integer eID, String email, Integer managerID) {
+		super();
+		this.status = status;
+		this.eID = eID;
+		this.email = email;
+		this.managerID = managerID;
+	}
+
+
+
+
+
+
+
+
+	public Blob getImg() {
+		return img;
+	}
+
+
+
+
+	public void setImg(Blob img) {
+		this.img = img;
+	}
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 
@@ -79,20 +187,6 @@ public class ReimbursementsReq {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-
-
-
-	public String getImg() {
-		return img;
-	}
-
-
-
-
-	public void setImg(String img) {
-		this.img = img;
 	}
 
 

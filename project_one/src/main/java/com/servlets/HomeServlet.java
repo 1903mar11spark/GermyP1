@@ -54,7 +54,8 @@ public class HomeServlet extends HttpServlet {
 				session.setAttribute("Email", e.getEmail().toString());
 				session.setAttribute("First", e.getFirstname());
 				session.setAttribute("Last", e.getLastname());
-				session.setAttribute("Manager", e.getId().toString());
+				session.setAttribute("Manager", e.getManagerID().toString());
+				session.setAttribute("Employee", e.getId().toString());
 				
 				if(e.getManagerID() == null || e.getManagerID() == 0) {
 				res.sendRedirect("ProfileServlet");

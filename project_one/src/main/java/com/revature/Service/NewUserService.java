@@ -8,8 +8,8 @@ public class NewUserService {
 		NewUserDAOImpl employ = new NewUserDAOImpl();
 		employ.CreateUser(first, last, email, pass, mID);
 	}
-	public void CreateUser(String first, String last, String email, String pass, String img ) {
+	public void CreateEmployee(String first, String last, String email, String pass ) {
 		NewUserDAOImpl employ = new NewUserDAOImpl();
-		employ.CreateUser(first, last, email, pass, img);
+		employ.CreateEmployee(first, last, email, pass);
 	}
 }

@@ -43,7 +43,7 @@
 						<!-- Home -->
 						
 						<div class="tab-content">
-						  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 500px;">
+						  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 900px;">
 						 <div class="card1" >
 						 <img src="img.jpg" alt="John" style="width:100%">
 						  <h1>John Doe</h1>
@@ -63,68 +63,91 @@
 						 
 						 <!-- Request Reimbursements -->
 						 
-						 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 500px;">
-						 <button type="button" value = "Back" class="btn btn-dark" onclick="goBack()"> Go Back </button>
+						 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 900px;">							
 							
-							
-							<h1>Upload Receipts</h1>
-						 <center>
-						       <form method="post" action="uploadFile" enctype="multipart/form-data">
-						           Select file to upload:
-						           <input type="file" name="uploadFile" id = "img" onchange="previewFile()" />
-						           <br/><br/>
-						           <input type="submit" value="Upload" />
-						           <br><br>
-						           <img src="" height="200" id = "pre" alt="Image preview...">
-						       </form>
-						   </center>
-						 
-						 
-						 
-						 </div>
-						 
-						 <!-- Request Reimbursements -->
-						 
-						 <!-- View Reimbursements -->
-						 
-						 <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 500px;">
-						  <table class="table">
-						  <thead>
-						    <tr>
-						      <th scope="col">#</th>
-						      <th scope="col">First</th>
-						      <th scope="col">Last</th>
-						      <th scope="col">Handle</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>@fat</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">3</th>
-						      <td>Larry</td>
-						      <td>the Bird</td>
-						      <td>@twitter</td>
-						    </tr>
-						  </tbody>
-						</table>
+							<h1>Employee Expense Reimbursement</h1>
+					<center>
+					
+						 <form style = "height : 200px" method = "POST" action = "ReimbursementsServlet" enctype="multipart/form-data">
+					 	 <div class="form-group">
+					    <label for="exampleFormControlSelect1">Reimbursement Amount</label>
+					   <input type="text" class="form-control bfh-number" data-min="1" data-max="1000" data-wrap="true" name = "amount">
+					 	 </div>
+					 	 <div class="form-group">
+					    <label for="exampleFormControlSelect2">Select Reimbursement Type</label>
+					    <select multiple class="form-control" id="exampleFormControlSelect2" name = "category">
+					      <option>Travel and Mileage Reimbursement</option>
+					      <option>Business Expense Reimbursement</option>
+					      <option>Medical Reimbursement</option>
+					      <option>N/A</option>
+					    </select>
+					  	</div>
+					  	<div class="form-group">
+					   	 	<label for="exampleFormControlTextarea1">Request Description</label>
+					    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description"></textarea>
+					  	</div>
+				
+			           Upload a Reimbursement Verification:
+			           <input type="file" name="uploadFile" id = "img" onchange="previewFile()" />
+			           <br/><br/>
+			          
+			           <br><br>
+			           <img src="" height="100" id = "pre" alt="Image preview..." name = "requestimage">
+			           <br><br>
+			           <button type="submit" value = "ers" class="btn btn-dark" name="submitrequest"> Submit Request </button>
+					     	
+						</center>
+						
+						
+					</form>
+											    
+											 
+											 
+											 
+											 </div>
+											 
+											 <!-- Request Reimbursements -->
+											 
+											 <!-- View Reimbursements -->
+											 
+											 <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 900px;">
+											  <table class="table">
+											  <thead>
+											    <tr>
+											      <th scope="col">#</th>
+											      <th scope="col">First</th>
+											      <th scope="col">Last</th>
+											      <th scope="col">Handle</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <tr>
+											      <th scope="row">1</th>
+											      <td>Mark</td>
+											      <td>Otto</td>
+											      <td>@mdo</td>
+											    </tr>
+											    <tr>
+											      <th scope="row">2</th>
+											      <td>Jacob</td>
+											      <td>Thornton</td>
+											      <td>@fat</td>
+											    </tr>
+											    <tr>
+											      <th scope="row">3</th>
+											      <td>Larry</td>
+											      <td>the Bird</td>
+											      <td>@twitter</td>
+											    </tr>
+											  </tbody>
+											</table>
 						  </div>
 						  
 						 <!-- View Reimbursements --> 
 						 
 						 <!-- Update Info -->
 						 
-						 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 500px;">
+						 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 900px;">
 							<form method = "POST" action = "UpdateEmployeeServlet">	
 						 <div class="form-group col-md-4 mb-3">
 						    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>

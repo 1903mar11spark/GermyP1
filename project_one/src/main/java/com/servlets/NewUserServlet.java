@@ -58,19 +58,24 @@ public class NewUserServlet extends HttpServlet {
 		System.out.println(first);
 		if (mID == null) {
 			 newID = null;
+			 	NewUserService register = new NewUserService();
+				register.CreateEmployee(first, last, email, pass);
+				System.out.println("Testing if NewUserServlet Call is a Success: " + email);
+				response.sendRedirect("home");
 		}else {
 			newID = Integer.parseInt(mID);
+			if (email != null && pass != null && first != null && last != null) {
+				NewUserService register = new NewUserService();
+				register.CreateUser(first, last, email, pass,newID);
+				System.out.println("Testing if NewUserServlet Call is a Success: " + email);
+				response.sendRedirect("home");
+				}else {
+					System.out.println("New User Empty Check (NewUserServlet): " +first + last);
+					response.sendRedirect("NewUserServlet");
+				}
 		}
 		
-		if (email != null && pass != null && first != null && last != null) {
-		NewUserService register = new NewUserService();
-		register.CreateUser(first, last, email, pass,newID);
-		System.out.println("Testing if NewUserServlet Call is a Success: " + email);
-		response.sendRedirect("home");
-		}else {
-			System.out.println("New User Empty Check (NewUserServlet): " +first + last);
-			response.sendRedirect("NewUserServlet");
-		}
+		
 	}
 
 }

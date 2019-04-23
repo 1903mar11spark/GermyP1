@@ -51,16 +51,20 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		String last = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		
 		Employees emp = new Employees(first,last,email,pass);
 		HomeService home = new HomeService();
+		
 		if(emp.getFirstname() != null) {
-		System.out.println("valid user to update:" + emp.getFirstname());
-		home.UpdateEmployee(emp,user);
-		response.sendRedirect("ProfileServlet");
+			
+			System.out.println("valid user to update:" + emp.getFirstname());
+			home.UpdateEmployee(emp,user);
+			response.sendRedirect("ProfileServlet");
+		
 		}else {
-		response.sendRedirect("UpdateEmployeeServlet");
+			response.sendRedirect("UpdateEmployeeServlet");
 		}
-		System.out.println("Update Employee:"+ first +". Servlet redirect to Profile (UES Class).");
+			System.out.println("Update Employee:"+ first +". Servlet redirect to Profile (UES Class).");
 	}
 
 }

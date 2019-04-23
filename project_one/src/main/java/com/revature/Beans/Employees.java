@@ -69,6 +69,18 @@ public class Employees {
 		this.password = password;
 	}
 
+	
+
+	public Employees(Integer id, String firstname, String lastname, String email, InputStream img, Integer managerID) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.img = img;
+		this.managerID = managerID;
+	}
+
 	public InputStream getImg() {
 		return img;
 	}

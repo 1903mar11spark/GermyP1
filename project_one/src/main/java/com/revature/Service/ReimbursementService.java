@@ -12,5 +12,10 @@ public class ReimbursementService {
 		ReimbursementDAOImpl dao = new ReimbursementDAOImpl();
 		dao.submitService(req);
 	}
+	
+	public  void submitRequestWithImage (ReimbursementsReq req) throws SQLException, IOException{
+		ReimbursementDAOImpl dao = new ReimbursementDAOImpl();
+		dao.submitServiceImage(req);
+	}
 
 }

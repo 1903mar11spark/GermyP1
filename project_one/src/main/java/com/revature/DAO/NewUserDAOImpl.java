@@ -40,7 +40,7 @@ public class NewUserDAOImpl implements NewUserDAO {
 	
 	//If user uploads an image then this method should be called
 	@Override
-	public void CreateUser(String first, String last, String email, String pass, String img) {
+	public void CreateEmployee(String first, String last, String email, String pass) {
 		PreparedStatement stmt = null;
        
         
@@ -48,12 +48,11 @@ public class NewUserDAOImpl implements NewUserDAO {
 		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
-			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, IMG) VALUES (?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS) VALUES (?,?,?,?)");
 			stmt.setString(1, first);
 			stmt.setString(2, last);
 			stmt.setString(3, email);
 			stmt.setString(4, pass);
-			stmt.setString(5, img);
 		    stmt.execute();
 		    
 		    
