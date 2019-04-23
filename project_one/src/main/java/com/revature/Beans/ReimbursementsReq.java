@@ -1,7 +1,6 @@
 package com.revature.Beans;
 
 import java.io.InputStream;
-import java.sql.Blob;
 import java.text.NumberFormat;
 
 public class ReimbursementsReq {

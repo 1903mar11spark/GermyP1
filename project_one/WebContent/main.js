@@ -7,9 +7,7 @@
 						email: document.getElementById("email").value,
 						password: document.getElementById("pwd").value
 					}
-			 	
-			   
-			   
+			 
 			   let authentication = JSON.stringify(loginData);
 			 	//console.log(logtainData)
 			   let xhr = new XMLHttpRequest();
@@ -19,7 +17,7 @@
 				   console.log(authentication)
 				  
 				   let info = JSON.parse(xhr.responseText);
-					   
+					 
 				   }
 			   
 			   xhr.onError = ()=>{
@@ -38,6 +36,7 @@
 				
 				window.open("http://localhost:8089/project_one/NewUser.html","_self")		
 		}
+		let employee;
 		function newUser(){
 				console.log("new user")
 				
@@ -63,8 +62,57 @@
 				xhr.send(JSON.stringify(newusers))
 		}
 		
+function EmployeeInfo(){
+	var data;
+	var info;
+	let xhr = new XMLHttpRequest();	    
+    
+	 xhr.open("POST", "http://localhost:8089/project_one/UsersServlet");
+	    xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
 
+	    	data = JSON.parse(xhr.responseText);
+	       
+	        let place = document.getElementById("shane");
+            let usersName = document.createElement("li");
+            let email = document.createElement("li");
+            
+            usersName.innerHTML =  data.first + " " + data.last;
+            email.innerHTML = "Email: " + data.email;
 
+            place.appendChild(usersName);
+            place.appendChild(email);
+            
+
+	    };
+
+	     xhr.onerror = function() {
+	         console.log('Error');
+	     }
+	     xhr.send(data);
+}
+	
+
+function getImage(){
+	var data;
+	var info;
+	let xhr = new XMLHttpRequest();	    
+    
+	 xhr.open("POST", "http://localhost:8089/project_one/ImageServlet");
+	 xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
+
+		 data = JSON.parse(xhr.responseText);
+            
+
+	    };
+
+	     xhr.onerror = function() {
+	         console.log('Error');
+	     }
+	     xhr.send(data);
+}	
+		
+		
+		
 		let newpic = "";
 		function previewFile(){
 			    var preview = document.querySelector('img'); //selects the query named img

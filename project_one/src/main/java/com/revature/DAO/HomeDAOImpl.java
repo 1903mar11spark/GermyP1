@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.reavature.Util.ConnectionUtil;
 import com.revature.Beans.Employees;
-import com.revature.Beans.ReimbursementsReq;
 
 public class HomeDAOImpl implements HomeDAO {
 	String plug = "Connections.properties";
@@ -65,7 +64,7 @@ public class HomeDAOImpl implements HomeDAO {
 		 try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
 			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, IMG, MANAGER_ID ) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+					+ "VALUES (?,?,?,?,?,?)");
 		    rs = smt.executeQuery();
 		   
 				while (rs.next()) {
@@ -73,7 +72,7 @@ public class HomeDAOImpl implements HomeDAO {
 					String first = rs.getString("FIRSTNAME");
 					String last = rs.getString("LASTNAME");
 					String email = rs.getString("EMAIL");
-					InputStream img = rs.getBinaryStream("img");
+					InputStream img = rs.getBinaryStream("IMG");
 					int mID = rs.getInt("MANAGER_ID");
 					
 					all.add(new Employees(eID, first, last, email, img, mID));
@@ -140,6 +139,58 @@ public class HomeDAOImpl implements HomeDAO {
 			
 			return emp;		
 }
+	
+	public Employees getEmployee(String email) {
+		PreparedStatement stmt = null ;
+		ResultSet rs = null;
+		String first = "", last = "", mail = "", password = "", title = "";
+		InputStream img = null;
+		Integer eID = 0, mID = null;
+		
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
+		  { 
+			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, IMG, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ?");
+			  stmt.setString(1, email);
+			  
+		  
+		  
+				 rs = stmt.executeQuery();
+				 while (rs.next()) {
+						 eID = rs.getInt("EMPLOYEE_ID");
+						 first = rs.getString("FIRSTNAME");
+						 last = rs.getString("LASTNAME");
+						 mail = rs.getString("EMAIL");
+						 password = rs.getString("PASS");
+						 title = rs.getString("TITLE");
+						 img = (InputStream) rs.getBlob("IMG");
+						 mID = rs.getInt("MANAGER_ID");
+						 
+						 System.out.println("Getting email with image");
+				 }
+		  }
+		  catch (SQLException e) 
+		  { 
+			  e.printStackTrace(); 
+		  }
+		  catch (IOException e) 
+		  {
+			  e.printStackTrace(); 
+		  }
+		catch (NullPointerException e) 
+		  { 
+			  e.printStackTrace(); 
+		  }
+		finally {
+		    try { rs.close(); } catch (Exception e) { /* ignored */ }
+		}
+		
+			Employees emp = new Employees(eID,first,last,mail,password,title,img,mID);
+			
+			return emp;		
+}
+	
+	
+	
 	
 public void UpdateEmployee(Employees emp, String user) {
 	PreparedStatement stmt = null, stmt2 = null;

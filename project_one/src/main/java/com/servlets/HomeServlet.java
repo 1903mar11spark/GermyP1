@@ -4,22 +4,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONObject;
+import org.json.JSONException;
 
-import com.fasterxml.jackson.core.JsonParser; 
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+
 import com.revature.Beans.Employees;
 import com.revature.Service.HomeService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 
 public class HomeServlet extends HttpServlet {
@@ -58,6 +53,8 @@ public class HomeServlet extends HttpServlet {
 				session.setAttribute("Employee", e.getId().toString());
 				
 				if(e.getManagerID() == null || e.getManagerID() == 0) {
+					
+				
 				res.sendRedirect("ProfileServlet");
 				}else {
 					//if manager id is not null, redirect to home page
@@ -71,8 +68,7 @@ public class HomeServlet extends HttpServlet {
 				res.sendRedirect("home");
 			}
 			
-			PrintWriter out = res.getWriter();
-			out.println("Data:" + email);
+			
 			
 		}
 }

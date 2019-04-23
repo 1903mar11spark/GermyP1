@@ -32,7 +32,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			smt.setInt(7, req.getManagerID());
 			smt.setString(8, req.getCategory());
 			smt.setString(9, req.getDescription());
-			
 			smt.execute();
 			
 		} catch (SQLException sqlEx) {

@@ -10,7 +10,7 @@
 <body background = "img/bg1.jpeg">
 <div>
 
-	<form class="needs-validation" novalidate id = "addPost" action = "NewUserServlet" method = "POST">
+	<form class="needs-validation" novalidate id = "addPost" action = "NewUserServlet" method = "POST" enctype="multipart/form-data">
   <div class="form-row">
     <div class="col-md-4 mb-3">
       <label for="validationCustom01" ><font color = "white">First name</font></label>
@@ -58,7 +58,8 @@
   <!-- Manager choice -->	
 		<div class="custom-file">
 		<input type="file" class="custom-file-input" id="customFile">
-		<label class="custom-file-label" for="customFile">Choose Profile Picture</label>
+		<br><br>
+			           <img src="" height="100" id = "pre" alt="Image preview..." name = "requestimage">
 		</div>
 		<button type="submit" class="btn btn-primary"  onClick = newUser()>Submit</button>
 		

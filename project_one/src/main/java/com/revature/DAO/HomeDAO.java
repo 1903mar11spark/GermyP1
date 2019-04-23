@@ -11,6 +11,6 @@ public interface HomeDAO {
 	public boolean FindEmployee (String email, String pass);
 	
 	public Employees getEmployee(String email, String pass);
-
+	public Employees getEmployee(String email);
 	List<Employees> AllEmployees(Employees emp);
 }

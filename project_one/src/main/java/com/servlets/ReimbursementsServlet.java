@@ -5,9 +5,7 @@ import com.revature.Service.ReimbursementService;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
-import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import javax.sql.rowset.serial.SerialBlob;
 
 /**
  * Servlet implementation class ReimbursementsServlet
@@ -47,9 +44,16 @@ public class ReimbursementsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		ReimbursementService reim = new ReimbursementService();
 		HttpSession session = request.getSession(false);
+		/*Blobs: 1. Create an object of type Part, 2. Request to get a parameter that matches the name of an input from your HTML file.
+		 * For me, that parameter was "uploadFile". In the form that surrounds the upload button and other information relevant to Reimbursement
+		 * requests I have a value enctype="multipart/form-data" and a @MultipartConfig tag at the top my servlet. This may or may not be necessary.
+		 * 3. Create InputStream obj, then set it equal to InputStreamObject.getInputStream(). 4. Send InmputStream Object to DAO.
+		 * 5. In your DAO set your parameter in your SQL query as setBlob such like this smt.setBlob(1, req.getImg());
+		 * Note: getImage method is of type InputStream and is a part of my Reimbursement Request Class.*/
+		
 		Part filePart = request.getPart("uploadFile");
 		InputStream fileContent = null;
 

@@ -1,5 +1,7 @@
 package com.revature.Service;
 
+import java.io.InputStream;
+
 import com.revature.DAO.NewUserDAOImpl;
 
 public class NewUserService {
@@ -11,5 +13,9 @@ public class NewUserService {
 	public void CreateEmployee(String first, String last, String email, String pass ) {
 		NewUserDAOImpl employ = new NewUserDAOImpl();
 		employ.CreateEmployee(first, last, email, pass);
+	}
+	public void CreateEmployeeWithImage(String first, String last, String email, String pass , InputStream img) {
+		NewUserDAOImpl employ = new NewUserDAOImpl();
+		employ.CreateEmployeeWithImage(first, last, email, pass, img);
 	}
 }
