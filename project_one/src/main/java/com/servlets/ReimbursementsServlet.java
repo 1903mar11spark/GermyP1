@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
 
 /**
  * Servlet implementation class ReimbursementsServlet
@@ -48,14 +50,13 @@ public class ReimbursementsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		ReimbursementService reim = new ReimbursementService();
 		HttpSession session = request.getSession(false);
-		Blob bob = null;
-		Part filePart = request.getPart("requestimage");
-		
+		Part filePart = request.getPart("uploadFile");
+		InputStream fileContent = null;
+
 		if(filePart != null) {
-        InputStream fileContent = filePart.getInputStream();
+         fileContent = filePart.getInputStream();
 		
-         bob = (Blob) fileContent;
-		}
+		}else {System.out.println("File empty");}
 		
 		String amount = request.getParameter("amount");
 		String cat = request.getParameter("category");
@@ -66,12 +67,12 @@ public class ReimbursementsServlet extends HttpServlet {
 		String mID = session.getAttribute("Manager").toString();
 		String eID = session.getAttribute("Employee").toString();
 		
-		if(bob != null) {
+		if(fileContent != null) {
 			Integer newid = Integer.parseInt(eID);
 			Integer newmanager = Integer.parseInt(mID);
 			Double newamount = Double.parseDouble(amount);
 			
-			ReimbursementsReq req = new ReimbursementsReq(bob,newamount,newid,first,last,email,newmanager,script,cat);
+			ReimbursementsReq req = new ReimbursementsReq(fileContent,newamount,newid,first,last,email,newmanager,script,cat);
 			
 					try {
 						reim.submitRequestWithImage(req);

@@ -1,5 +1,6 @@
 package com.revature.Beans;
 
+import java.io.InputStream;
 import java.sql.Blob;
 import java.text.NumberFormat;
 
@@ -7,7 +8,7 @@ public class ReimbursementsReq {
 	
 	private Integer rID;
 	private String status = "Pending";
-	private Blob img;
+	private InputStream img;
 	private Double amount;
 	private Integer eID;
 	private String firstname;
@@ -76,7 +77,7 @@ public class ReimbursementsReq {
 
 
 
-	public ReimbursementsReq(Blob img, Double amount, Integer eID, String firstname, String lastname, String email,
+	public ReimbursementsReq(InputStream img, Double amount, Integer eID, String firstname, String lastname, String email,
 			Integer managerID, String description, String category) {
 		super();
 		this.img = img;
@@ -108,14 +109,14 @@ public class ReimbursementsReq {
 
 
 
-	public Blob getImg() {
+	public InputStream getImg() {
 		return img;
 	}
 
 
 
 
-	public void setImg(Blob img) {
+	public void setImg(InputStream img) {
 		this.img = img;
 	}
 
