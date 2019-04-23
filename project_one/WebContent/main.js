@@ -75,13 +75,14 @@ function EmployeeInfo(){
 	        let place = document.getElementById("shane");
             let usersName = document.createElement("li");
             let email = document.createElement("li");
-            
+            let employ = document.createElement("li");
             usersName.innerHTML =  data.first + " " + data.last;
             email.innerHTML = "Email: " + data.email;
-
+            employ.innerHTML = "Employee ID: "+ data.employee;
+            
             place.appendChild(usersName);
             place.appendChild(email);
-            
+            place.appendChild(employ);
 
 	    };
 
@@ -100,7 +101,7 @@ function getImage(){
 	 xhr.open("POST", "http://localhost:8089/project_one/ImageServlet");
 	 xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
 
-		 data = JSON.parse(xhr.responseText);
+		// data = JSON.parse(xhr.responseText);
             
 
 	    };

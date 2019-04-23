@@ -1,6 +1,6 @@
 package com.revature.Beans;
 
-import java.io.InputStream;
+import java.sql.Blob;
 
 public class Employees {
 
@@ -10,7 +10,7 @@ public class Employees {
 	private String email;
 	private String password;
 	private String title;
-	private InputStream img;
+	private Blob img;
 	private Integer managerID = null;
 	
 
@@ -37,7 +37,7 @@ public class Employees {
 	
 
 	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
-			InputStream img, Integer managerID) {
+			Blob img, Integer managerID) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -50,7 +50,7 @@ public class Employees {
 	}
 
 	public Employees(Integer id, String firstname, String lastname, String email, String password, String title,
-			InputStream img) {
+			Blob img) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -71,7 +71,7 @@ public class Employees {
 
 	
 
-	public Employees(Integer id, String firstname, String lastname, String email, InputStream img, Integer managerID) {
+	public Employees(Integer id, String firstname, String lastname, String email, Blob img, Integer managerID) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -81,11 +81,11 @@ public class Employees {
 		this.managerID = managerID;
 	}
 
-	public InputStream getImg() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImg(InputStream img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	
 	}

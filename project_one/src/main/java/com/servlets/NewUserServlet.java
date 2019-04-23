@@ -2,8 +2,6 @@ package com.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,18 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import java.io.BufferedReader;
-import java.sql.Blob;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.revature.Service.NewUserService;
 
 /**
  * Servlet implementation class NewUserServlet
  */
-@MultipartConfig
+
 @WebServlet("/NewUserServlet")
+@MultipartConfig
 public class NewUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

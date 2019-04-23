@@ -4,8 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.JSONObject;
-import org.json.JSONException;
+
 
 
 import com.revature.Beans.Employees;
@@ -14,7 +13,6 @@ import com.revature.Service.HomeService;
 import javax.servlet.ServletException;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 
 public class HomeServlet extends HttpServlet {
@@ -28,6 +26,7 @@ public class HomeServlet extends HttpServlet {
 		request.getRequestDispatcher("home.html").forward(request, response);
 	}
 
+		@SuppressWarnings("unused")
 		protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 			String email = req.getParameter("email");
 			String password = req.getParameter("pwd");
@@ -49,7 +48,9 @@ public class HomeServlet extends HttpServlet {
 				session.setAttribute("Email", e.getEmail().toString());
 				session.setAttribute("First", e.getFirstname());
 				session.setAttribute("Last", e.getLastname());
-				session.setAttribute("Manager", e.getManagerID().toString());
+				if(e.getManagerID() == null) {
+				session.setAttribute("Manager", 0);
+				}
 				session.setAttribute("Employee", e.getId().toString());
 				
 				if(e.getManagerID() == null || e.getManagerID() == 0) {

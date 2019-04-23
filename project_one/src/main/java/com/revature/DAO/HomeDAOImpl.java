@@ -2,6 +2,7 @@ package com.revature.DAO;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,7 +73,7 @@ public class HomeDAOImpl implements HomeDAO {
 					String first = rs.getString("FIRSTNAME");
 					String last = rs.getString("LASTNAME");
 					String email = rs.getString("EMAIL");
-					InputStream img = rs.getBinaryStream("IMG");
+					Blob img = rs.getBlob("IMG");
 					int mID = rs.getInt("MANAGER_ID");
 					
 					all.add(new Employees(eID, first, last, email, img, mID));
@@ -97,7 +98,7 @@ public class HomeDAOImpl implements HomeDAO {
 		PreparedStatement stmt = null ;
 		ResultSet rs = null;
 		String first = "", last = "", mail = "", password = "", title = "";
-		InputStream img = null;
+		Blob img = null;
 		Integer eID = 0, mID = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
@@ -115,7 +116,7 @@ public class HomeDAOImpl implements HomeDAO {
 						 mail = rs.getString("EMAIL");
 						 password = rs.getString("PASS");
 						 title = rs.getString("TITLE");
-						 img = rs.getBinaryStream("img");
+						 img = rs.getBlob("img");
 						 mID = rs.getInt("MANAGER_ID");
 				 }
 		  }
@@ -146,14 +147,12 @@ public class HomeDAOImpl implements HomeDAO {
 		String first = "", last = "", mail = "", password = "", title = "";
 		InputStream img = null;
 		Integer eID = 0, mID = null;
-		
+		Blob b = null;
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		  { 
-			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, IMG, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ?");
+			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ?");
 			  stmt.setString(1, email);
-			  
-		  
-		  
+		
 				 rs = stmt.executeQuery();
 				 while (rs.next()) {
 						 eID = rs.getInt("EMPLOYEE_ID");
@@ -162,11 +161,18 @@ public class HomeDAOImpl implements HomeDAO {
 						 mail = rs.getString("EMAIL");
 						 password = rs.getString("PASS");
 						 title = rs.getString("TITLE");
-						 img = (InputStream) rs.getBlob("IMG");
 						 mID = rs.getInt("MANAGER_ID");
 						 
-						 System.out.println("Getting email with image");
+						 
 				 }
+				 stmt = con.prepareStatement( "SELECT IMG FROM EMPLOYEES WHERE EMAIL = ?");
+				 stmt.setString(1, email);
+				 rs = stmt.executeQuery();
+				 
+				 while(rs.next()) {
+					  b =  rs.getBlob("IMG");
+				 }
+				// if(b != null) {img = b.getBinaryStream();System.out.println("Getting email with image");}
 		  }
 		  catch (SQLException e) 
 		  { 
@@ -184,7 +190,7 @@ public class HomeDAOImpl implements HomeDAO {
 		    try { rs.close(); } catch (Exception e) { /* ignored */ }
 		}
 		
-			Employees emp = new Employees(eID,first,last,mail,password,title,img,mID);
+			Employees emp = new Employees(eID,first,last,mail,password,title,b,mID);
 			
 			return emp;		
 }

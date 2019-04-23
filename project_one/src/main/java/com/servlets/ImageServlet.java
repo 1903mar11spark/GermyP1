@@ -1,18 +1,19 @@
 package com.servlets;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.revature.Beans.Employees;
 import com.revature.Service.HomeService;
@@ -50,12 +51,28 @@ public class ImageServlet extends HttpServlet {
 		Employees current = emp.getDAOEmployee(session.getAttribute("Email").toString());
 		
 		
-		response.setContentType("image/png");
-		ServletOutputStream image = response.getOutputStream();
-		InputStream in = current.getImg();
-		BufferedImage bi = ImageIO.read(in);
-		String mimeType = "multipart/form-data";
-		ImageIO.write(bi,"jpg",image);
+		response.setContentType("image/jpg");
+		
+		Blob in = current.getImg();
+		InputStream encoded = null;
+		try {
+			encoded = in.getBinaryStream();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//byte[] bytes = IOUtils.toByteArray(in);
+		//byte[] encoded = java.util.Base64.getEncoder().encode(bytes);
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			json.put("pic", encoded);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(encoded == null) {System.out.println("image empty");}else {System.out.println("blob secured");}
 		
 	}
 
