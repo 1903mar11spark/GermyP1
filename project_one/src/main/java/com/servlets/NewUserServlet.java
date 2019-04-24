@@ -46,7 +46,7 @@ public class NewUserServlet extends HttpServlet {
 		String last = request.getParameter("last");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		String mID = request.getParameter("mID");
+		String mID = request.getParameter("managerID");
 		Integer newID;
 
 		//if user chooses null has a manager ID to be a reg employee, I check value and parse if to Int if not null

@@ -80,95 +80,106 @@ public class ReimbursementsServlet extends HttpServlet {
 		
 
 		if(filePart != null) {
-         fileContent = filePart.getInputStream();
-		
-		
-		
-		String amount = request.getParameter("amount");
-		String cat = request.getParameter("category");
-		String script = request.getParameter("description");
-		String first = session.getAttribute("First").toString();
-		String last = session.getAttribute("Last").toString();
-		String email = session.getAttribute("Email").toString();
-		String eID = session.getAttribute("Employee").toString();
+					fileContent = filePart.getInputStream();
+         
+					String amount = request.getParameter("amount");
+					String cat = request.getParameter("category");
+					String script = request.getParameter("description");
+					String first = session.getAttribute("First").toString();
+					String last = session.getAttribute("Last").toString();
+					String email = session.getAttribute("Email").toString();
+					String eID = session.getAttribute("Employee").toString();
 	
-		if(session.getAttribute("Manager") == null) {
-			
-				
-		
-			Integer newid = Integer.parseInt(eID);
-			Integer newmanager = 0;
-			Double newamount = Double.parseDouble(amount);
-			
-			ReimbursementsReq req = new ReimbursementsReq(fileContent,newamount,newid,first,last,email,newmanager,script,cat);
-			
-					try {
-						reim.submitRequestWithImage(req);
-						response.sendRedirect("ProfileServlet");
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-			
-			}else{
-					String mID = session.getAttribute("Manager").toString();
-					Integer newid = Integer.parseInt(eID);
-					Integer newmanager = Integer.parseInt(mID);
-					Double newamount = Double.parseDouble(amount);
-					
-					ReimbursementsReq req = new ReimbursementsReq(fileContent,newamount,newid,first,last,email,newmanager,script,cat);
-					
-					try {
-						reim.submitRequest(req);
-						response.sendRedirect("ProfileServlet");
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-			}
-		}else {
-			System.out.println("File empty");
-			String amount = request.getParameter("amount");
-			String cat = request.getParameter("category");
-			String script = request.getParameter("description");
-			String first = session.getAttribute("First").toString();
-			String last = session.getAttribute("Last").toString();
-			String email = session.getAttribute("Email").toString();
-			String eID = session.getAttribute("Employee").toString();
-		
-			if(session.getAttribute("Manager") == null) {
-				
-					
-			
-				Integer newid = Integer.parseInt(eID);
-				Integer newmanager = 0;
-				Double newamount = Double.parseDouble(amount);
-				
-				ReimbursementsReq req = new ReimbursementsReq(newamount,newid,first,last,email,newmanager,script,cat);
-				
-						try {
-							reim.submitRequestWithImage(req);
-							response.sendRedirect("ProfileServlet");
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-				
-				}else{
-						String mID = session.getAttribute("Manager").toString();
+					if(session.getAttribute("Manager") == null) {
+						
 						Integer newid = Integer.parseInt(eID);
-						Integer newmanager = Integer.parseInt(mID);
+						Integer newmanager = 0;
+						Double newamount = Double.parseDouble(amount);
+						
+						ReimbursementsReq req = new ReimbursementsReq(fileContent,newamount,newid,first,last,email,newmanager,script,cat);
+						
+								try 
+								{
+									reim.submitRequestWithImage(req);
+									response.sendRedirect("ProfileServlet");
+								}
+								catch (SQLException e) 
+								{
+									e.printStackTrace();
+								}
+						
+					}else{
+								String mID = session.getAttribute("Manager").toString();
+								Integer newid = Integer.parseInt(eID);
+								Integer newmanager = Integer.parseInt(mID);
+								Double newamount = Double.parseDouble(amount);
+								
+								ReimbursementsReq req = new ReimbursementsReq(fileContent,newamount,newid,first,last,email,newmanager,script,cat);
+								
+								try 
+								{
+									reim.submitRequest(req);
+									response.sendRedirect("ProfileServlet");
+								} 
+								catch (SQLException e) 
+								{
+									e.printStackTrace();
+								}
+						}
+		}else {
+			//if no user input of a file, do same set of results with no image passed through
+					System.out.println("File empty");
+					String amount = request.getParameter("amount");
+					String cat = request.getParameter("category");
+					String script = request.getParameter("description");
+					String first = session.getAttribute("First").toString();
+					String last = session.getAttribute("Last").toString();
+					String email = session.getAttribute("Email").toString();
+					String eID = session.getAttribute("Employee").toString();
+				
+					if(session.getAttribute("Manager") == null) {
+						
+							
+					
+						Integer newid = Integer.parseInt(eID);
+						Integer newmanager = 0;
 						Double newamount = Double.parseDouble(amount);
 						
 						ReimbursementsReq req = new ReimbursementsReq(newamount,newid,first,last,email,newmanager,script,cat);
 						
-						try {
-							reim.submitRequest(req);
-							response.sendRedirect("ProfileServlet");
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
+								try 
+								{
+									reim.submitRequestWithImage(req);
+									response.sendRedirect("ProfileServlet");
+								} 
+								catch (SQLException e) 
+								{
+									e.printStackTrace();
+								}
+						
+					}else{
+								String mID = session.getAttribute("Manager").toString();
+								Integer newid = Integer.parseInt(eID);
+								Integer newmanager = Integer.parseInt(mID);
+								Double newamount = Double.parseDouble(amount);
+								
+								ReimbursementsReq req = new ReimbursementsReq(newamount,newid,first,last,email,newmanager,script,cat);
+								
+								try 
+								{
+									reim.submitRequest(req);
+									response.sendRedirect("ProfileServlet");
+								} 
+								catch (SQLException e) 
+								{
+									e.printStackTrace();
+								}
 			
-			}
-		}
-	}
+					}
+				}
+			}//end of doPost
+	
+	
 }	
 		
 

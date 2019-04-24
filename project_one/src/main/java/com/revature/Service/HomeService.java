@@ -29,6 +29,11 @@ public class HomeService {
 		home.UpdateEmployee(emp, user);
 		System.out.println("Service Method Update Employee Called for: " + emp.getFirstname());
 	}
+	public void ManagerUpdate(Employees emp, String user) {
+		HomeDAOImpl home = new HomeDAOImpl();
+		home.ManagerUpdate(emp, user);
+		System.out.println("Service Method Update Employee Called for: " + emp.getFirstname());
+	}
 	
 	public List<Employees> GetAllEmployees(Employees emp){
 		HomeDAOImpl home = new HomeDAOImpl();

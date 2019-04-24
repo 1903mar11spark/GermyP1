@@ -45,6 +45,8 @@ public class UpdateEmployeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		
+		
+		if(session.getAttribute("Manager") == null || session.getAttribute("Manager").toString() == "0") {
 		String user = session.getAttribute("Email").toString();
 		
 		String first = request.getParameter("firstname");
@@ -59,12 +61,36 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			
 			System.out.println("valid user to update:" + emp.getFirstname());
 			home.UpdateEmployee(emp,user);
-			response.sendRedirect("ProfileServlet");
+			response.sendRedirect("ManagerView");
 		
 		}else {
 			response.sendRedirect("UpdateEmployeeServlet");
 		}
 			System.out.println("Update Employee:"+ first +". Servlet redirect to Profile (UES Class).");
+		}else {
+			
+			
+			
+			String user = session.getAttribute("Email").toString();
+			
+			String first = request.getParameter("firstname");
+			String last = request.getParameter("lastname");
+			String email = request.getParameter("email");
+			String pass = request.getParameter("pass");
+			
+			Employees emp = new Employees(first,last,email,pass);
+			HomeService home = new HomeService();
+			
+			if(emp.getFirstname() != null) {
+				
+				System.out.println("valid user to update:" + emp.getFirstname());
+				home.UpdateEmployee(emp,user);
+				response.sendRedirect("ManagerView");
+			
+			}else {
+				response.sendRedirect("UpdateEmployeeServlet");
+			}
+		}
 	}
 
 }

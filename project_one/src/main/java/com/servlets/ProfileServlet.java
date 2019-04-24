@@ -29,8 +29,12 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		if(session != null) {
 		System.out.println("Profile Servlet Called. Current session: " + session.getAttribute("Email").toString());
 		request.getRequestDispatcher("Profile.html").forward(request, response);
+		}else {
+			request.getRequestDispatcher("home").forward(request, response);
+		}
 	}
 
 	/**

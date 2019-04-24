@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ManagerProfile
@@ -25,8 +26,14 @@ public class ManagerProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(session != null ) {
 		request.getRequestDispatcher("ManagerView.html").forward(request, response);
+		}else {
+			request.getRequestDispatcher("home").forward(request, response);
+		}
 	}
 
 	/**

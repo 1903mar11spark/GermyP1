@@ -31,7 +31,7 @@
 				    <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false"> View Reimbursements </a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false"> Update Info </a>
+				    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#update" role="tab" aria-controls="settings" aria-selected="false"> Update Info </a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="settings" aria-selected="false"> Upload Photo </a>
@@ -131,7 +131,7 @@
 						 <!-- Update Info -->
 						 
 						 
-					 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 900px;">
+					 <div class="tab-pane" id="update" role="tabpanel" aria-labelledby="settings-tab" style = "height : 900px;">
 							<form method = "POST" action = "UpdateEmployeeServlet">	
 								 <div class="form-group col-md-4 mb-3">
 								    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>
@@ -174,7 +174,7 @@
 						 <!-- Photo -->
 						 
 						 
-				  <div class="tab-pane active" id="photo" role="tabpanel" aria-labelledby="photo-tab" style = "height : 900px;">
+				  <div class="tab-pane" id="photo" role="tabpanel" aria-labelledby="photo-tab" style = "height : 900px;">
 						 
 						 <form action="ImageServlet" method="POST"> 
 							<div class="input-group">
@@ -185,7 +185,7 @@
 							    	<input onchange="previewFile()" type="file" class="custom-file-input" id="inputGroupFile01" name= "uploadFile" aria-describedby="inputGroupFileAddon01" accept="image/x-png,image/gif,image/jpeg" enctype="multipart/form-data">
 							    	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 							 	 </div>
-							 	  <button type="submit" value="submit" name = "log" class="btn btn-danger" style = "float : right">submit</button>
+							 	  <button type="submit" value="submit" name = "log" class="btn btn-success" style = "float : right">submit</button>
 							</div>
 						</form> 
 				 </div>
