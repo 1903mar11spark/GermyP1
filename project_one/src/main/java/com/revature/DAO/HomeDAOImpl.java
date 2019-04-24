@@ -1,7 +1,6 @@
 package com.revature.DAO;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -341,6 +340,62 @@ public void ManagerUpdate(Employees emp, String user) {
 	finally {
 	    try { rs.close(); } catch (Exception e) { /* ignored */ }
 	}
+	
+}
+
+@Override
+public void Approve(Integer rID) {
+	PreparedStatement stmt = null;
+	
+	try (Connection con = ConnectionUtil.getConnectionFromFile()) 
+	  { 
+		stmt = con.prepareStatement( "UPDATE REIMBURSEMENTS SET STATUS = ? WHERE R_ID = ?");
+		stmt.setString(1, "Approved");
+		stmt.setInt(2, rID);
+		
+		stmt.executeUpdate();
+	  }
+	catch (SQLException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	  catch (IOException e) 
+	  {
+		  e.printStackTrace(); 
+	  }
+	catch (NullPointerException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	
+	
+}
+
+@Override
+public void Deny(Integer rID) {
+	PreparedStatement stmt = null;
+	
+	try (Connection con = ConnectionUtil.getConnectionFromFile()) 
+	  { 
+		stmt = con.prepareStatement( "UPDATE REIMBURSEMENTS SET STATUS = ? WHERE R_ID = ?");
+		stmt.setString(1, "Denied");
+		stmt.setInt(2, rID);
+		
+		stmt.executeUpdate();
+	  }
+	catch (SQLException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	  catch (IOException e) 
+	  {
+		  e.printStackTrace(); 
+	  }
+	catch (NullPointerException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	
 	
 }
 	

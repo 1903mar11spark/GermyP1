@@ -94,8 +94,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		{
-			smt = con.prepareStatement("INSERT INTO REIMBURSEMENTS  ( STATUS,IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL, MANAGER_ID ) "
-																+ "VALUES (?,?,?,?,?,?,?,?)");
+			smt = con.prepareStatement("INSERT INTO REIMBURSEMENTS  ( STATUS,IMG, AMOUNT, EMPLOYEE_ID, FIRSTNAME,LASTNAME, EMAIL, MANAGER_ID, CATEGORY ) "
+																+ "VALUES (?,?,?,?,?,?,?,?,?)");
 			smt.setString(1, req.getStatus());
 			smt.setBlob(2, req.getImg());
 			smt.setDouble(3, req.getAmount());
@@ -104,7 +104,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			smt.setString(6, req.getLastname());
 			smt.setString(7, req.getEmail());
 			smt.setInt(8, req.getManagerID());
-			
+			smt.setString(9, req.getCategory());
 			smt.execute();
 			
 		} catch (SQLException sqlEx) {

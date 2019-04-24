@@ -29,7 +29,7 @@ public class ReimbursementsReq {
 
 
 	public ReimbursementsReq(Integer rID, String status, Double amount, Integer eID, String firstname, String lastname,
-			String email, Integer managerID, String description) {
+			String email, Integer managerID, String category) {
 		super();
 		this.rID = rID;
 		this.status = status;
@@ -39,7 +39,7 @@ public class ReimbursementsReq {
 		this.lastname = lastname;
 		this.email = email;
 		this.managerID = managerID;
-		this.description = description;
+		this.category = category;
 	}
 
 

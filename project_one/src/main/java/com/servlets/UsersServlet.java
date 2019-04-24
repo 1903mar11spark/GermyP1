@@ -51,7 +51,10 @@ public class UsersServlet extends HttpServlet {
 			json.put("first", session.getAttribute("First").toString());
 			json.put("last", session.getAttribute("Last").toString());
 			json.put("employee", session.getAttribute("Employee").toString());
-			//if(session.getAttribute("Manager").toString() != null) {json.put("Manager",session.getAttribute("Manager").toString());}
+			if(session.getAttribute("Manager").toString() != null || session.getAttribute("Manager").toString() != "0") {
+				json.put("Manager",session.getAttribute("Manager").toString());
+				}
+			
 			out.print(json);
 			
 			

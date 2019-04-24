@@ -57,4 +57,14 @@ public class HomeService {
 		
 		return result;
 	}
+	public void Approve(Integer rID) {
+		HomeDAOImpl home = new HomeDAOImpl();
+		home.Approve(rID);
+		
+	}
+	public void Deny(Integer rID) {
+		HomeDAOImpl home = new HomeDAOImpl();
+		home.Deny(rID);
+		
+	}
 }

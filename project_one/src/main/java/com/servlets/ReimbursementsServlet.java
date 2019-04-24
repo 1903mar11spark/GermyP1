@@ -6,7 +6,6 @@ import com.revature.Service.ReimbursementService;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,23 +40,20 @@ public class ReimbursementsServlet extends HttpServlet {
      */
     public ReimbursementsServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		view = reim.GetAllReimbursement();
-		//response.setContentType("application/json");
 		
-		//for(ReimbursementsReq c : view) {
-			response.getWriter().write((new ObjectMapper()).writeValueAsString(view));
+		
+		view = reim.GetAllReimbursement();
+		
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(view));
 			
-		//	}
-		//out.write(json);
+		
 	}
 
 	/**

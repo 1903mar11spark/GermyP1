@@ -71,7 +71,7 @@ function EmployeeInfo(){
 	let xhr = new XMLHttpRequest();	    
     
 	 xhr.open("POST", "http://localhost:8089/project_one/UsersServlet");
-	    xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
+	    xhr.onload = () => {
 
 	    	data = JSON.parse(xhr.responseText);
 	       
@@ -79,14 +79,16 @@ function EmployeeInfo(){
             let usersName = document.createElement("li");
             let email = document.createElement("li");
             let employ = document.createElement("li");
+            let man = document.createElement("li");
+            
             usersName.innerHTML =  data.first + " " + data.last;
             email.innerHTML = "Email: " + data.email;
-            employ.innerHTML = "Employee ID: "+ data.employee;
-            
+            employ.innerHTML = "Employee ID: " + data.employee;
+            man.innerHTML = "Manager ID: " + data.Manager;
             place.appendChild(usersName);
             place.appendChild(email);
             place.appendChild(employ);
-
+            place.appendChild(man);
 	    };
 
 	     xhr.onerror = function() {
@@ -98,6 +100,9 @@ function EmployeeInfo(){
 
 function Requests(){
 	fetch("http://localhost:8089/project_one/ReimbursementsServlet").then(function(response) {
+		
+		
+		
 		return response.json();
 	}).then(function(data) {
 		if (data.session === null) {
@@ -113,7 +118,7 @@ function Requests(){
 			let type = row.insertCell(3);
 			let stat =  row.insertCell(4);
 			let info = row.insertCell(5);
-		
+			let button = row.insertCell(6);
 	
 			requestId.setAttribute('scope', 'row');
 			requestId.innerHTML = data[i].rID;
@@ -125,13 +130,17 @@ function Requests(){
 			man.innerHTML = data[i].email;
 
 			type.setAttribute('scope', 'row');
-			type.innerHTML = data[i].amount;
+			type.innerHTML = "$" + data[i].amount;
 			
 			stat.setAttribute('scope', 'row');
 			stat.innerHTML = data[i].category;
 
 			info.setAttribute('scope', 'row');
 			info.innerHTML = data[i].status;
+			
+			button.setAttribute('scope', 'row');
+			button.innerHTML = `<button type="button" class="btn btn-success" onclick=Approve(${data[i].rID})>Approve</button>
+							  	<button type="button" class="btn btn-danger"  onclick=Deny(${data[i].rID})>Deny</button>`;
 
 			console.log(data[i].description);
 		}
@@ -139,7 +148,44 @@ function Requests(){
 	});
 }
 
-	
+function Approve(approve){
+	let content = {approvereq: approve};
+	fetch("http://localhost:8089/project_one/ApproveDenyServlet", {
+		  method: 'post',
+		  headers: {
+		    'Content-Type': 'application/json'
+		  },
+		  body: JSON.stringify(content)
+		}).then(function(response) {
+		return response.json();
+	}).then(function(data) {
+		if (data.session === null) {
+			window.location = "http://localhost:8089/project_one/ManagerProfile";
+		} else {
+			console.log(data);
+		   
+	}
+	});
+}
+function Deny(deny){
+	let content = {denyreq: deny};
+	fetch("http://localhost:8089/project_one/ApproveDenyServlet", {
+		  method: 'post',
+		  headers: {
+		    'Content-Type': 'application/json'
+		  },
+		  body: JSON.stringify(content)
+		}).then(function(response) {
+		return response.json();
+	}).then(function(data) {
+		if (data.session === null) {
+			window.location = "http://localhost:8089/project_one/ManagerProfile";
+		} else {
+			console.log(data);
+		   
+	}
+	});
+}	
 
 function getImage(){
 	
