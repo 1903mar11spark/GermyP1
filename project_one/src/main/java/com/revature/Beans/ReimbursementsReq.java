@@ -264,8 +264,8 @@ public class ReimbursementsReq {
 	public String toString() {
 		NumberFormat format =  NumberFormat.getCurrencyInstance();
 		
-		return "Reimbursement Requests: [ Reimbursement ID = " + rID + ", Amount = " + format.format(amount) + ", Reimbursement Status = " + status + ", Employee = "
-				+ eID + ", First Name = " + firstname + ", Last Name = " + lastname + ", Email = " + email + ", Manager's ID = " + managerID + " , Image = " + img +" ]";
+		return "Reimbursements [ReimbursementID=" + rID + ",Amount=" + format.format(amount) + ",ReimbursementStatus=" + status + ",Employee="
+				+ eID + ",FirstName=" + firstname + ",LastName=" + lastname + ",Email=" + email + ",ManagersID=" + managerID +"]" ;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.Beans.ReimbursementsReq;
 import com.revature.Service.ReimbursementService;
 
@@ -30,6 +31,12 @@ import org.json.JSONObject;
 @MultipartConfig
 public class ReimbursementsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public List<ReimbursementsReq> view = new ArrayList<>();
+	public ReimbursementService reim = new ReimbursementService();
+	
+	
+	JSONObject json = new JSONObject();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,26 +52,14 @@ public class ReimbursementsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		List<ReimbursementsReq> view = new ArrayList<>();
-		ReimbursementService reim = new ReimbursementService();
 		view = reim.GetAllReimbursement();
+		//response.setContentType("application/json");
 		
-		JSONObject json = new JSONObject();
-		
-		response.setContentType("application/json");
-		
-		for(ReimbursementsReq c : view) {
-				try {
-				
-					json.put("Reimbursements", c.getFirstname().toString());
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		//for(ReimbursementsReq c : view) {
+			response.getWriter().write((new ObjectMapper()).writeValueAsString(view));
 			
-			}
-		out.print(json);
+		//	}
+		//out.write(json);
 	}
 
 	/**

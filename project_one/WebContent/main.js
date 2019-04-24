@@ -97,32 +97,46 @@ function EmployeeInfo(){
 
 
 function Requests(){
-	var data;
-	var info;
-	let xhr = new XMLHttpRequest();	    
-	let list = document.createElement("li");
-    
-	 	xhr.open("POST", "http://localhost:8089/project_one/ReimbursementsServlet");
-	    xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
-	    	let print = document.getElementById('rlist');
-	    	data = JSON.parse(xhr.responseText);
-	    	for (var i = 0; i < data.length; i++){
-	    	     list.innerHTML = data[i];
-	    	   
-	    	    print.appendChild(list);
-	    	    
-	    	    
-	    	    
-	    	    console.log(list);
-	    	  }  
-	 
+	fetch("http://localhost:8089/project_one/ReimbursementsServlet").then(function(response) {
+		return response.json();
+	}).then(function(data) {
+		if (data.session === null) {
+			window.location = "http://localhost:8089/project_one/ReimbursementsServlet";
+		} else {
+			console.log(data);
+		   for (let i = 0 ; i < data.length; i ++) {
+			var table =  document.getElementById("rlist");
+			let row = table.insertRow(0);
+			let requestId = row.insertCell(0);
+			let employeeId = row.insertCell(1);
+			let man =  row.insertCell(2);
+			let type = row.insertCell(3);
+			let stat =  row.insertCell(4);
+			let info = row.insertCell(5);
+		
+	
+			requestId.setAttribute('scope', 'row');
+			requestId.innerHTML = data[i].rID;
+			
+			employeeId.setAttribute('scope', 'row');
+			employeeId.innerHTML = data[i].eID;
+			
+			man.setAttribute('scope', 'row');
+			man.innerHTML = data[i].email;
 
-	    }
+			type.setAttribute('scope', 'row');
+			type.innerHTML = data[i].amount;
+			
+			stat.setAttribute('scope', 'row');
+			stat.innerHTML = data[i].category;
 
- xhr.onerror = function() {
-     console.log('Error');
- }
- xhr.send(data);
+			info.setAttribute('scope', 'row');
+			info.innerHTML = data[i].status;
+
+			console.log(data[i].description);
+		}
+	}
+	});
 }
 
 	
