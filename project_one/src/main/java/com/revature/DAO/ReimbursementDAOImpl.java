@@ -58,8 +58,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		
 		try  (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
-			smt = con.prepareStatement("SELECT FROM REIMBURSEMENTS  (R_ID, STATUS, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, MANAGER_ID, CATEGORY ) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?)");
+			smt = con.prepareStatement("SELECT R_ID, STATUS, AMOUNT, EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, MANAGER_ID, CATEGORY  FROM REIMBURSEMENTS") ;
 		    rs = smt.executeQuery();
 		   
 				while (rs.next()) {

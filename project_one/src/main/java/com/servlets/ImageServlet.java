@@ -46,33 +46,25 @@ public class ImageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		HomeService emp = new HomeService();
-		
-		
 		Employees current = emp.getDAOEmployee(session.getAttribute("Email").toString());
+		String pic = request.getParameter("upfile");
+		boolean result = false;
 		
-		
-		response.setContentType("image/jpg");
-		
-		Blob in = current.getImg();
-		InputStream encoded = null;
-		try {
-			encoded = in.getBinaryStream();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if(pic != null) {
+		result = emp.upload(pic, session.getAttribute("Email").toString());
 		}
-		//byte[] bytes = IOUtils.toByteArray(in);
-		//byte[] encoded = java.util.Base64.getEncoder().encode(bytes);
+		System.out.println("Upload Successful: " + result) ;
 		
-		JSONObject json = new JSONObject();
+			response.sendRedirect("ProfileServlet");
 		
-		try {
-			json.put("pic", encoded);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(encoded == null) {System.out.println("image empty");}else {System.out.println("blob secured");}
+		//response.setContentType("image/jpg");
+		
+		
+		
+		//JSONObject json = new JSONObject();
+		
+		
+		
 		
 	}
 

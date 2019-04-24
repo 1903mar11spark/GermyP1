@@ -7,10 +7,10 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </head>
-<body background = "img/bg1.jpeg" enctype="multipart/form-data">
+<body background = "img/bg1.jpeg">
 <div>
 
-	<form class="needs-validation" novalidate id = "addPost" action = "NewUserServlet" method = "POST" enctype="multipart/form-data">
+	<form class="needs-validation" novalidate id = "addPost" action = "NewUserServlet" method = "POST">
   <div class="form-row">
     <div class="col-md-4 mb-3">
       <label for="validationCustom01" ><font color = "white">First name</font></label>
@@ -57,9 +57,7 @@
   </div>
   <!-- Manager choice -->	
 		
-		 <input type="file" name="uploadFile" id = "img"  accept="image/x-png,image/gif,image/jpeg" enctype="multipart/form-data"  />
-		<br><br>
-		
+		</div>
 		<button type="submit" class="btn btn-primary"  onClick = newUser()>Submit</button>
 		
 	

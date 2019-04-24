@@ -5,7 +5,10 @@ import com.revature.Service.ReimbursementService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class ReimbursementsServlet
@@ -37,7 +44,27 @@ public class ReimbursementsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter out = response.getWriter();
+		List<ReimbursementsReq> view = new ArrayList<>();
+		ReimbursementService reim = new ReimbursementService();
+		view = reim.GetAllReimbursement();
+		
+		JSONObject json = new JSONObject();
+		
+		response.setContentType("application/json");
+		
+		for(ReimbursementsReq c : view) {
+				try {
+				
+					json.put("Reimbursements", c.getFirstname().toString());
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
+		out.print(json);
 	}
 
 	/**
@@ -46,6 +73,7 @@ public class ReimbursementsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ReimbursementService reim = new ReimbursementService();
+		
 		HttpSession session = request.getSession(false);
 		/*Blobs: 1. Create an object of type Part, 2. Request to get a parameter that matches the name of an input from your HTML file.
 		 * For me, that parameter was "uploadFile". In the form that surrounds the upload button and other information relevant to Reimbursement
@@ -56,6 +84,7 @@ public class ReimbursementsServlet extends HttpServlet {
 		
 		Part filePart = request.getPart("uploadFile");
 		InputStream fileContent = null;
+		
 
 		if(filePart != null) {
          fileContent = filePart.getInputStream();
@@ -70,6 +99,7 @@ public class ReimbursementsServlet extends HttpServlet {
 		String email = session.getAttribute("Email").toString();
 		String mID = session.getAttribute("Manager").toString();
 		String eID = session.getAttribute("Employee").toString();
+	
 		
 		if(fileContent != null) {
 			Integer newid = Integer.parseInt(eID);

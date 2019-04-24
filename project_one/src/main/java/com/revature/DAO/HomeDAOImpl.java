@@ -1,7 +1,6 @@
 package com.revature.DAO;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,7 +63,7 @@ public class HomeDAOImpl implements HomeDAO {
 		
 		 try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
-			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, IMG, MANAGER_ID ) "
+			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PIC, MANAGER_ID ) "
 					+ "VALUES (?,?,?,?,?,?)");
 		    rs = smt.executeQuery();
 		   
@@ -73,7 +72,7 @@ public class HomeDAOImpl implements HomeDAO {
 					String first = rs.getString("FIRSTNAME");
 					String last = rs.getString("LASTNAME");
 					String email = rs.getString("EMAIL");
-					Blob img = rs.getBlob("IMG");
+					String img = rs.getString("PIC");
 					int mID = rs.getInt("MANAGER_ID");
 					
 					all.add(new Employees(eID, first, last, email, img, mID));
@@ -97,13 +96,12 @@ public class HomeDAOImpl implements HomeDAO {
 	public Employees getEmployee(String email, String pass) {
 		PreparedStatement stmt = null ;
 		ResultSet rs = null;
-		String first = "", last = "", mail = "", password = "", title = "";
-		Blob img = null;
+		String first = "", last = "", mail = "", password = "", title = "", pic = "";
 		Integer eID = 0, mID = null;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		  { 
-			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, IMG, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ? AND PASS = ?");
+			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, PIC, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ? AND PASS = ?");
 			  stmt.setString(1, email);
 			  stmt.setString(2, pass);
 		  
@@ -116,7 +114,7 @@ public class HomeDAOImpl implements HomeDAO {
 						 mail = rs.getString("EMAIL");
 						 password = rs.getString("PASS");
 						 title = rs.getString("TITLE");
-						 img = rs.getBlob("img");
+						 pic = rs.getString("PIC");
 						 mID = rs.getInt("MANAGER_ID");
 				 }
 		  }
@@ -136,7 +134,7 @@ public class HomeDAOImpl implements HomeDAO {
 		    try { rs.close(); } catch (Exception e) { /* ignored */ }
 		}
 		
-			Employees emp = new Employees(eID,first,last,mail,password,title,img,mID);
+			Employees emp = new Employees(eID,first,last,mail,password,title,pic,mID);
 			
 			return emp;		
 }
@@ -144,13 +142,12 @@ public class HomeDAOImpl implements HomeDAO {
 	public Employees getEmployee(String email) {
 		PreparedStatement stmt = null ;
 		ResultSet rs = null;
-		String first = "", last = "", mail = "", password = "", title = "";
-		InputStream img = null;
+		String first = "", last = "", mail = "", password = "", title = "",  pic = "";
 		Integer eID = 0, mID = null;
-		Blob b = null;
+
 		try (Connection con = ConnectionUtil.getConnectionFromFile()) 
 		  { 
-			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, MANAGER_ID FROM EMPLOYEES WHERE EMAIL = ?");
+			  stmt = con.prepareStatement( "SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PASS, TITLE, MANAGER_ID, PIC FROM EMPLOYEES WHERE EMAIL = ?");
 			  stmt.setString(1, email);
 		
 				 rs = stmt.executeQuery();
@@ -165,14 +162,6 @@ public class HomeDAOImpl implements HomeDAO {
 						 
 						 
 				 }
-				 stmt = con.prepareStatement( "SELECT IMG FROM EMPLOYEES WHERE EMAIL = ?");
-				 stmt.setString(1, email);
-				 rs = stmt.executeQuery();
-				 
-				 while(rs.next()) {
-					  b =  rs.getBlob("IMG");
-				 }
-				// if(b != null) {img = b.getBinaryStream();System.out.println("Getting email with image");}
 		  }
 		  catch (SQLException e) 
 		  { 
@@ -189,13 +178,12 @@ public class HomeDAOImpl implements HomeDAO {
 		finally {
 		    try { rs.close(); } catch (Exception e) { /* ignored */ }
 		}
-		
-			Employees emp = new Employees(eID,first,last,mail,password,title,b,mID);
+			Employees emp = new Employees(eID,first,last,mail,password,title,pic,mID);
 			
 			return emp;		
 }
 	
-	
+
 	
 	
 public void UpdateEmployee(Employees emp, String user) {
@@ -258,6 +246,39 @@ public void UpdateEmployee(Employees emp, String user) {
 	finally {
 	    try { rs.close(); } catch (Exception e) { /* ignored */ }
 	}
+}
+
+@Override
+public boolean upload(String pic, String email) {
+	PreparedStatement stmt = null ;
+	ResultSet rs = null;
+	boolean result = false;
+	try (Connection con = ConnectionUtil.getConnectionFromFile()) 
+	  { 
+		  stmt = con.prepareStatement( "INSERT INTO EMPLOYEES PIC  VALUES ? WHERE EMAIL = ?");
+		  stmt.setString(1, pic);
+		  stmt.setString(2, email);
+	
+		  result = stmt.execute();		 
+			 
+	  }
+	  catch (SQLException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	  catch (IOException e) 
+	  {
+		  e.printStackTrace(); 
+	  }
+	catch (NullPointerException e) 
+	  { 
+		  e.printStackTrace(); 
+	  }
+	finally {
+	    try { rs.close(); } catch (Exception e) { /* ignored */ }
+	}
+		
+			return result;
 }
 	
 	

@@ -9,122 +9,105 @@
 	<script type="text/javascript" src="main.js"></script>
 </head>
 
-<body background = "img/bg1.jpeg" onload="EmployeeInfo(); getImage();">
+<body background = "img/bg1.jpeg" onload="EmployeeInfo(); getImage(); Requests();" enctype="multipart/form-data">
 
-<div class="container">
-
+		<div class="container">
 		<h1><font color = "white">Employee Home Page </font> </h1>
 		</div>
-	
-	<div class="card text-center">
-		<div class="card-header">
+<div class="card text-center">
+	<div class="card-header">
 
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> Home </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Request Reimbursements </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false"> View Reimbursements </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false"> Update Info </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="logout-tab" data-toggle="tab" href="#out" role="tab" aria-controls="out" aria-selected="false"> Log Out </a>
-		  </li>
-		</ul>
+				<!-- Nav tabs -->
+				
+				
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> Home </a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Request Reimbursements </a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false"> View Reimbursements </a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false"> Update Info </a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="settings" aria-selected="false"> Upload Photo </a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="logout-tab" data-toggle="tab" href="#out" role="tab" aria-controls="out" aria-selected="false"> Log Out </a>
+				  </li>
+				</ul>
 
-						<!-- Tab panes -->
+<!----------------------------------==================== Tab panes--------------------------------------------------------------------------------------------------- -->
 						
 						<!-- Home -->
 						
-						<div class="tab-content">
-						  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 900px;">
-						 
-						 
-						 
-
-<div class="card text-white bg-dark mb-3" style="max-width: 180rem;  
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;height : 500px;">
-  
-  <div class="card-header" id ="shane">Welcome!</div>
-	  <div class="card-body" id = "shane">
-	  
-	    										<h5 class="card-title" id = "dcard" >Dark card title</h5>
-	    										
-	    
-	    
-	  </div>
-</div>
-						 
-						 
-						 
-						 
-						 
-						 
-						 
-						  </div>
+						
+				<div class="tab-content">
+					<div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" style = "height : 900px;">	
+						<div class="card text-white bg-dark mb-3" style="max-width: 180rem;  
+						  margin: auto;
+						  width: 50%;
+						  border: 3px solid green;
+						  padding: 10px;height : 300px;">
+					   <div class="card-header" id ="shane">Welcome!</div>
+						  	<div class="card-body" id = "shane">
+						    	<h5 class="card-title" id = "dcard" ></h5> 
+							</div>
+					</div>
+						
+					</div>
+						  
 						  
 						  <!-- Home -->
 						 
+						 
 						 <!-- Request Reimbursements -->
 						 
-						 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 900px;">							
-							
+						 
+				 <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" style = "height : 900px;">
 							<h1>Employee Expense Reimbursement</h1>
 					<center>
-					
 						 <form style = "height : 200px" method = "POST" action = "ReimbursementsServlet" enctype="multipart/form-data">
 					 	 <div class="form-group">
-					    <label for="exampleFormControlSelect1">Reimbursement Amount</label>
-					   <input type="text" class="form-control bfh-number" data-min="1" data-max="1000" data-wrap="true" name = "amount">
+					    	<label for="exampleFormControlSelect1">Reimbursement Amount</label>
+					   		<input type="text" class="form-control bfh-number" data-min="1" data-max="1000" data-wrap="true" name = "amount">
 					 	 </div>
-					 	 <div class="form-group">
-					    <label for="exampleFormControlSelect2">Select Reimbursement Type</label>
-					    <select multiple class="form-control" id="exampleFormControlSelect2" name = "category">
-					      <option>Travel and Mileage Reimbursement</option>
-					      <option>Business Expense Reimbursement</option>
-					      <option>Medical Reimbursement</option>
-					      <option>N/A</option>
-					    </select>
-					  	</div>
-					  	<div class="form-group">
-					   	 	<label for="exampleFormControlTextarea1">Request Description</label>
-					    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description"></textarea>
-					  	</div>
+							 	 <div class="form-group">
+							    	<label for="exampleFormControlSelect2">Select Reimbursement Type</label>
+							    	<select multiple class="form-control" id="exampleFormControlSelect2" name = "category">
+							    	  <option>Travel and Mileage Reimbursement</option>
+							     	 <option>Business Expense Reimbursement</option>
+							     	 <option>Medical Reimbursement</option>
+							     	 <option>N/A</option>
+							    	</select>
+							  	</div>
+							  	<div class="form-group">
+							   	 	<label for="exampleFormControlTextarea1">Request Description</label>
+							    	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description"></textarea>
+							  	</div>
 				
-			           Upload a Reimbursement Verification:
-			           <input type="file" name="uploadFile" id = "img"  accept="image/x-png,image/gif,image/jpeg" onchange="previewFile()" />
-			           <br/><br/>
-			          
-			           <br><br>
-			           <img src="" height="100" id = "pre" alt="Image preview..." name = "requestimage">
-			           <br><br>
-			           <button type="submit" value = "ers" class="btn btn-dark" name="submitrequest"> Submit Request </button>
-					     	
-						</center>
-						
-						
-					</form>
-											    
-											 
-											 
-											 
-											 </div>
+					           Upload a Reimbursement Verification:
+					           <input type="file" name="uploadFile" id = "img"  accept="image/x-png,image/gif,image/jpeg" onchange="previewFile()" enctype="multipart/form-data"/>
+					           <br/><br/><br><br>
+					           <img src="" height="100" id = "pre" alt="Image preview..." name = "requestimage">
+					           <br><br>
+					           <button type="submit" value = "ers" class="btn btn-dark" name="submitrequest"> Submit Request </button>
+						</form>
+					</center>	
+				</div>
 											 
 											 <!-- Request Reimbursements -->
 											 
+											 
 											 <!-- View Reimbursements -->
 											 
-											 <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 900px;">
-											  <table class="table">
+											 
+										<div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 900px;">
+											  <table class="table" id="rlist">
 											  <thead>
 											    <tr>
 											      <th scope="col">#</th>
@@ -154,67 +137,91 @@
 											    </tr>
 											  </tbody>
 											</table>
-						  </div>
+						  				</div>
+						  
 						  
 						 <!-- View Reimbursements --> 
 						 
+						 
 						 <!-- Update Info -->
 						 
-						 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 900px;">
+						 
+					 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" style = "height : 900px;">
 							<form method = "POST" action = "UpdateEmployeeServlet">	
-						 <div class="form-group col-md-4 mb-3">
-						    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>
-						    
-						    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
-						    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						  </div>
-						  <div class="form-group col-md-4 mb-3">
-						    <label for="exampleInputPassword1"><font color = "black">Password</font></label>
-						    
-						    <input type="password" class="form-control" id="pass" placeholder="Password" name = "pass">
-						    
-						  </div>
-						  
-						  
-						   <div class="col-md-4 mb-3">
-						      <label for="validationCustom01" ><font color = "black">First name</font></label>
-						      
-						      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "firstname">
-						      <div class="valid-feedback">
-						         <font color = "green">Looks good! </font>
-						      </div>
-						    </div>
-						    <div class="col-md-4 mb-3">
-						      <label for="validationCustom02"><font color = "black">Last name</font></label>
-						      
-						      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "lastname">
-						      <div class="valid-feedback">
-						        <font color = "green">Looks good! </font>
-						      </div>
-						    </div>
+								 <div class="form-group col-md-4 mb-3">
+								    <label for="exampleInputEmail1"><font color = "black">Email address</font></label>
+								    
+								    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
+								    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+								  </div>
+								  <div class="form-group col-md-4 mb-3">
+								    <label for="exampleInputPassword1"><font color = "black">Password</font></label>
+								    <input type="password" class="form-control" id="pass" placeholder="Password" name = "pass">
+								  </div>
+									   <div class="col-md-4 mb-3">
+									      <label for="validationCustom01" ><font color = "black">First name</font></label>
+									      
+									      <input type="text" class="form-control" id="first" placeholder="First name" value="Germy" required name = "firstname">
+									      <div class="valid-feedback">
+									         <font color = "green">Looks good! </font>
+									      </div>
+									    </div>
+								    <div class="col-md-4 mb-3">
+								      <label for="validationCustom02"><font color = "black">Last name</font></label>
+								      
+								      <input type="text" class="form-control" id="last" placeholder="Last name" value="Louis" required name = "lastname">
+								      <div class="valid-feedback">
+								        <font color = "green">Looks good! </font>
+								      </div>
+								    </div>
 						     <div class="form-group form-check">
-						  <button type="submit" class="btn btn-primary form-control"  >Submit</button>
-						  </div>
+						  		<button type="submit" class="btn btn-primary form-control"  >Submit</button>
+						 	 </div>
 						</form>
 						
-</div>
+					</div>
 						
 						  
 						  
-						  <!-- Update Info -->
+						 <!-- Update Info -->
+						 
+						 
+						 <!-- Photo -->
+						 
+						 
+				  <div class="tab-pane active" id="photo" role="tabpanel" aria-labelledby="photo-tab" style = "height : 900px;">
+						 
+						 <form action="ImageServlet" method="POST"> 
+							<div class="input-group">
+							  	<div class="input-group-prepend">
+							   	 	<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+							 	</div>
+								<div class="custom-file">
+							    	<input onchange="previewFile()" type="file" class="custom-file-input" id="inputGroupFile01" name= "uploadFile" aria-describedby="inputGroupFileAddon01" accept="image/x-png,image/gif,image/jpeg" enctype="multipart/form-data">
+							    	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+							 	 </div>
+							 	  <button type="submit" value="submit" name = "log" class="btn btn-danger" style = "float : right">submit</button>
+							</div>
+						</form> 
+				 </div>
+				 
+				 
+						 <!-- Photo -->
+						 
 						 
 						 <!-- LogOut -->
 						 
-						 <div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab" style = "height : 500px;">
+						 
+				 <div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab" style = "height : 500px;">
 						<form action="LogOutServlet" method="GET"> 
-						 <button type="submit" value="Logout" name = "log" class="btn btn-danger" style = "float : right">Log-Out</button>
+						 	<button type="submit" value="Logout" name = "log" class="btn btn-danger" style = "float : right">Log-Out</button>
   						</form>
-  						</div>
+  				</div>
   					 	
   						 <!-- LogOut -->
   
   
-</div>
+  </div>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

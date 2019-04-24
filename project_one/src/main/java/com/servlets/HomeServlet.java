@@ -26,7 +26,6 @@ public class HomeServlet extends HttpServlet {
 		request.getRequestDispatcher("home.html").forward(request, response);
 	}
 
-		@SuppressWarnings("unused")
 		protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 			String email = req.getParameter("email");
 			String password = req.getParameter("pwd");
@@ -40,7 +39,7 @@ public class HomeServlet extends HttpServlet {
 			//If user valid set session attributes
 			System.out.println("CHECK POINT: " + email + e.getEmail());
 			
-			if ( e != null ) {
+			if ( home.validateEmployee(email, password) ) {
 				
 				System.out.println(home.validateEmployee(email, password));
 				

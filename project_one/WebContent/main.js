@@ -36,6 +36,7 @@
 				
 				window.open("http://localhost:8089/project_one/NewUser.html","_self")		
 		}
+		
 		let employee;
 		function newUser(){
 				console.log("new user")
@@ -61,6 +62,8 @@
 				xhr.overrideMimeType('application/xml');
 				xhr.send(JSON.stringify(newusers))
 		}
+		
+		
 		
 function EmployeeInfo(){
 	var data;
@@ -91,85 +94,74 @@ function EmployeeInfo(){
 	     }
 	     xhr.send(data);
 }
-	
 
-function getImage(){
+
+function Requests(){
 	var data;
 	var info;
 	let xhr = new XMLHttpRequest();	    
+	let list = document.createElement("li");
     
-	 xhr.open("POST", "http://localhost:8089/project_one/ImageServlet");
-	 xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
+	 	xhr.open("POST", "http://localhost:8089/project_one/ReimbursementsServlet");
+	    xhr.onload = () => {//console.log(JSON.parse(xhr.responseText).name)
+	    	let print = document.getElementById('rlist');
+	    	data = JSON.parse(xhr.responseText);
+	    	for (var i = 0; i < data.length; i++){
+	    	     list.innerHTML = data[i];
+	    	   
+	    	    print.appendChild(list);
+	    	    
+	    	    
+	    	    
+	    	    console.log(list);
+	    	  }  
+	 
 
-		// data = JSON.parse(xhr.responseText);
-            
+	    }
 
-	    };
+ xhr.onerror = function() {
+     console.log('Error');
+ }
+ xhr.send(data);
+}
 
-	     xhr.onerror = function() {
-	         console.log('Error');
-	     }
-	     xhr.send(data);
+	
+
+function getImage(){
+	
 }	
 		
 		
 		
-		let newpic = "";
-		function previewFile(){
-			    var preview = document.querySelector('img'); //selects the query named img
-			    var file    = document.querySelector('input[type=file]').files[0]; //sames as here
-			    var reader  = new FileReader();
-			
-			    reader.onloadend = function () {
-			        preview.src = reader.result;
-			        
-			    }
-			
-			    if (file) {
-			        reader.readAsDataURL(file); //reads the data as a URL
-			        function getBase64(file) {
-			        	reader.onload = function () {
-			        		newpic = reader.result;
-			        	     console.log(reader.result);
-			        	   };
-			        	   reader.onerror = function (error) {
-			        	     console.log('Error: ', error);
-			        	   };
-			        }
-			    } else {
-			        preview.src = "";
-			    }newpic = getBase64(file);
-			    console.log(newpic);
-			    
-		}
+let newpic = "";
+function previewFile(){
+	    var preview = document.querySelector('img'); //selects the query named img
+	    var file    = document.querySelector("input[type=file]").files[0]; //sames as here
+	    var reader  = new FileReader();
+	
+	    reader.onloadend = function () {
+	        preview.src = reader.result;
+	        
+	    }
+	
+	    if (file) {
+	        reader.readAsDataURL(file); //reads the data as a URL
+	        function getBase64(file) {
+	        	reader.onload = function () {
+	        		newpic = reader.result;
+	        	     console.log(reader.result);
+	        	   };
+	        	   reader.onerror = function (error) {
+	        	     console.log('Error: ', error);
+	        	   };
+	        }
+	    } else {
+	        preview.src = "";
+	    }
+	    console.log(newpic);
+	    
+}
 		
-		function goBack() {
-			  window.history.back();
-			}
 		
-		function getUser(){
-				fetch('http://localhost:8089/project_one/HomeServlet')
-				  .then(function(response) {
-				    return response.json();
-				  })
-				  .then(function(myJson) {
-				    console.log(JSON.stringify(myJson));
-				  });
-			}
-			(function() {
-				  'use strict';
-				  window.addEventListener('load', function() {
-				    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-				    var forms = document.getElementsByClassName('needs-validation');
-				    // Loop over them and prevent submission
-				    var validation = Array.prototype.filter.call(forms, function(form) {
-				      form.addEventListener('submit', function(event) {
-				        if (form.checkValidity() === false) {
-				          event.preventDefault();
-				          event.stopPropagation();
-				        }
-				        form.classList.add('was-validated');
-				      }, false);
-				    });
-				  }, false);
-				})();
+	
+			

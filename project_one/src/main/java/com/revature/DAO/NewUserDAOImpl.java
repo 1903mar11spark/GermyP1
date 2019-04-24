@@ -1,7 +1,6 @@
 package com.revature.DAO;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -68,7 +67,7 @@ public class NewUserDAOImpl implements NewUserDAO {
 }		
 	}
 
-	public void CreateEmployeeWithImage(String first, String last, String email, String pass, InputStream img) {
+	public void CreateEmployeeWithImage(String first, String last, String email, String pass, String pic) {
 		// TODO Auto-generated method stub
 PreparedStatement stmt = null;
        
@@ -77,12 +76,12 @@ PreparedStatement stmt = null;
 		try ( Connection con = ConnectionUtil.getConnectionFromFile()) {
 			
 			//Writing DML query, then using the PreparedStatement helper methods to later execute the query.
-			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, IMG) VALUES (?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO EMPLOYEES (FIRSTNAME, LASTNAME, EMAIL, PASS, PIC) VALUES (?,?,?,?,?)");
 			stmt.setString(1, first);
 			stmt.setString(2, last);
 			stmt.setString(3, email);
 			stmt.setString(4, pass);
-			stmt.setBlob(5, img);
+			stmt.setString(5, pic);
 		    stmt.execute();
 		    
 		    

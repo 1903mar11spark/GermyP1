@@ -1,14 +1,12 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.io.InputStream;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 
 import com.revature.Service.NewUserService;
@@ -50,24 +48,10 @@ public class NewUserServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String mID = request.getParameter("mID");
 		Integer newID;
-		
-		Part filePart = request.getPart("uploadFile");
-		InputStream fileContent = null;
-		
-		if(filePart != null) {
-	         fileContent = filePart.getInputStream();
-			
-			}else {System.out.println("File empty");}
-		if(fileContent != null) {
-			NewUserService register = new NewUserService();
-			register.CreateEmployeeWithImage(first, last, email, pass, fileContent);
-			System.out.println("Testing if New User with image Call is a Success: " + email);
-			response.sendRedirect("home");
-		}else {
-		
+
 		//if user chooses null has a manager ID to be a reg employee, I check value and parse if to Int if not null
 		System.out.println(first);
-		if (mID == null) {
+		if (mID == null || mID.equals("null")) {
 			 newID = null;
 			 	NewUserService register = new NewUserService();
 				register.CreateEmployee(first, last, email, pass);
@@ -87,7 +71,7 @@ public class NewUserServlet extends HttpServlet {
 		}
 		
 		
-	}
+	
 	}
 
 }

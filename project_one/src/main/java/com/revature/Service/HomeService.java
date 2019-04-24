@@ -45,4 +45,11 @@ public class HomeService {
 		
 		return emp;
 	}
+	public boolean upload(String pic, String email) {
+		boolean result = false;
+		HomeDAOImpl home = new HomeDAOImpl();
+		result = home.upload(pic, email);
+		
+		return result;
+	}
 }
