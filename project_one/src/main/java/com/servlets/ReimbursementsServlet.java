@@ -76,6 +76,7 @@ public class ReimbursementsServlet extends HttpServlet {
 		
 
 		if(filePart != null) {
+			System.out.println("File NOT NULL");
 					fileContent = filePart.getInputStream();
          
 					String amount = request.getParameter("amount");
@@ -86,8 +87,8 @@ public class ReimbursementsServlet extends HttpServlet {
 					String email = session.getAttribute("Email").toString();
 					String eID = session.getAttribute("Employee").toString();
 	
-					if(session.getAttribute("Manager") == null) {
-						
+					if(session.getAttribute("Manager") == null || session.getAttribute("Manager").toString() == "0" ) {
+						System.out.println("Employee Request Submission with Image");
 						Integer newid = Integer.parseInt(eID);
 						Integer newmanager = 0;
 						Double newamount = Double.parseDouble(amount);
@@ -105,6 +106,7 @@ public class ReimbursementsServlet extends HttpServlet {
 								}
 						
 					}else{
+								System.out.println("Manager Request Submission With Image");
 								String mID = session.getAttribute("Manager").toString();
 								Integer newid = Integer.parseInt(eID);
 								Integer newmanager = Integer.parseInt(mID);
@@ -114,7 +116,7 @@ public class ReimbursementsServlet extends HttpServlet {
 								
 								try 
 								{
-									reim.submitRequest(req);
+									reim.submitRequestWithImage(req);
 									response.sendRedirect("ProfileServlet");
 								} 
 								catch (SQLException e) 

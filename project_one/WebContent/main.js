@@ -125,7 +125,7 @@ function Requests(){
 			man.innerHTML = data[i].email;
 
 			type.setAttribute('scope', 'row');
-			type.innerHTML = data[i].amount;
+			type.innerHTML = "$" + data[i].amount;
 			
 			stat.setAttribute('scope', 'row');
 			stat.innerHTML = data[i].category;
