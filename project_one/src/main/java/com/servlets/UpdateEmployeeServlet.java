@@ -61,7 +61,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			
 			System.out.println("valid user to update:" + emp.getFirstname());
 			home.UpdateEmployee(emp,user);
-			response.sendRedirect("ManagerView");
+			response.sendRedirect("ProfileServlet");
 		
 		}else {
 			response.sendRedirect("UpdateEmployeeServlet");
@@ -71,7 +71,6 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			
 			
 			
-			String user = session.getAttribute("Email").toString();
 			
 			String first = request.getParameter("firstname");
 			String last = request.getParameter("lastname");
@@ -84,8 +83,8 @@ public class UpdateEmployeeServlet extends HttpServlet {
 			if(emp.getFirstname() != null) {
 				
 				System.out.println("valid user to update:" + emp.getFirstname());
-				home.UpdateEmployee(emp,user);
-				response.sendRedirect("ManagerView");
+				home.ManagerUpdate(emp);
+				response.sendRedirect("ManagerProfile");
 			
 			}else {
 				response.sendRedirect("UpdateEmployeeServlet");

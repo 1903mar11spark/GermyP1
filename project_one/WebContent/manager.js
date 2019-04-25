@@ -110,14 +110,15 @@ function Requests(){
 		} else {
 			console.log(data);
 		   for (let i = 0 ; i < data.length; i ++) {
+			   
 			var table =  document.getElementById("rlist");
 			let row = table.insertRow(0);
 			let requestId = row.insertCell(0);
 			let employeeId = row.insertCell(1);
-			let man =  row.insertCell(2);
-			let type = row.insertCell(3);
-			let stat =  row.insertCell(4);
-			let info = row.insertCell(5);
+			let email =  row.insertCell(2);
+			let amount = row.insertCell(3);
+			let cat =  row.insertCell(4);
+			let stat = row.insertCell(5);
 			let button = row.insertCell(6);
 	
 			requestId.setAttribute('scope', 'row');
@@ -126,17 +127,17 @@ function Requests(){
 			employeeId.setAttribute('scope', 'row');
 			employeeId.innerHTML = data[i].eID;
 			
-			man.setAttribute('scope', 'row');
-			man.innerHTML = data[i].email;
+			email.setAttribute('scope', 'row');
+			email.innerHTML = data[i].email;
 
-			type.setAttribute('scope', 'row');
-			type.innerHTML = "$" + data[i].amount;
+			amount.setAttribute('scope', 'row');
+			amount.innerHTML = "$" + data[i].amount;
 			
-			stat.setAttribute('scope', 'row');
-			stat.innerHTML = data[i].category;
+			cat.setAttribute('scope', 'row');
+			cat.innerHTML = data[i].category;
 
-			info.setAttribute('scope', 'row');
-			info.innerHTML = data[i].status;
+			stat.setAttribute('scope', 'row');
+			stat.innerHTML = data[i].status;
 			
 			button.setAttribute('scope', 'row');
 			button.innerHTML = `<button type="button" class="btn btn-success" onclick=Approve(${data[i].rID})>Approve</button>
@@ -148,6 +149,46 @@ function Requests(){
 	});
 }
 
+
+function AllEmployees(){
+	
+	fetch("http://localhost:8089/project_one/UsersServlet").then(function(response) {
+		return response.json();
+	}).then(function(data) {
+		if (data.session === null) {
+			window.location = "http://localhost:8089/project_one/UsersServlet";
+		} else {
+			console.log(data);
+		   for (let i = 0 ; i < data.length; i ++) {
+			   
+			var table =  document.getElementById("el");
+			let row = table.insertRow(0);
+			let eID = row.insertCell(0);
+			let first = row.insertCell(1);
+			let last =  row.insertCell(2);
+			let email = row.insertCell(3);
+			;
+	
+			eID.setAttribute('scope', 'row');
+			eID.innerHTML = data[i].id;
+			
+			first.setAttribute('scope', 'row');
+			first.innerHTML = data[i].firstname;
+			
+			last.setAttribute('scope', 'row');
+			last.innerHTML = data[i].lastname;
+
+			email.setAttribute('scope', 'row');
+			email.innerHTML =  data[i].email;
+			
+			
+			
+
+			console.log(data[i].description);
+		}
+	}
+	});
+}
 function Approve(approve){
 	let content = {approvereq: approve};
 	fetch("http://localhost:8089/project_one/ApproveDenyServlet", {
@@ -167,6 +208,7 @@ function Approve(approve){
 	}
 	});
 }
+
 function Deny(deny){
 	let content = {denyreq: deny};
 	fetch("http://localhost:8089/project_one/ApproveDenyServlet", {

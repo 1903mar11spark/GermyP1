@@ -34,14 +34,16 @@ public class LogOutServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		request.getRequestDispatcher("home").include(request, response);
 		HttpSession session = request.getSession(false);
-		//String button = request.getParameter("log");
+		
 		if (session != null ) {
 			session.invalidate();
+			//response.sendRedirect("home");
+			pw.println("<div class=\"display\"><p>You are successfully logged out</p></div>");
+			pw.println("<a href=\"home\">back to login</a>");
+			pw.println("</body></html>");
 		}
-		pw.println("<div class=\"display\"><p>You are successfully logged out</p></div>");
-		pw.println("<a href=\"home\">back to login</a>");
-		pw.println("</body></html>");
-		//response.sendRedirect("home");
+		
+		
 	}
 
 	/**

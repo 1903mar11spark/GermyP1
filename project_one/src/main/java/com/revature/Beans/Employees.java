@@ -23,6 +23,15 @@ public class Employees {
 		this.password = password;
 	}
 
+	public Employees(Integer id, String firstname, String lastname, String email, Integer managerID) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.managerID = managerID;
+	}
+
 	public Employees(Integer id, String firstname, String lastname, String email, String password, String title) {
 		super();
 		this.id = id;
@@ -142,8 +151,7 @@ public class Employees {
 
 	@Override
 	public String toString() {
-		return "Employees: [ Employee ID = " + id + ", Employee First Name = " + firstname + ", Employee Last Name = " + lastname + ", Employee Email = " + email
-				+ ", Employee Password = " + password + ", Title = " + title + ", Manager ID: "+ managerID+ ", Porifle Pic:"+ img + " ]";
+		return "Employees: [ Employee ID = " + id + ", Employee First Name = " + firstname + ", Employee Last Name = " + lastname + ", Employee Email = " + email+ ", ManagerID: "+ managerID+  " ]";
 	}
 	
 	

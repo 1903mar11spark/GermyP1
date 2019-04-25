@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Home Page</title>
+<title>Manager Home Page</title>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href=css/styles.css>
 	<script type="text/javascript" src="manager.js"></script>
 </head>
 
-<body background = "img/atmos.jpg" onload="EmployeeInfo(); getImage(); Requests();" enctype="multipart/form-data">
+<body background = "img/asph.jpg" onload="EmployeeInfo(); getImage(); Requests();AllEmployees();" enctype="multipart/form-data">
 
 		<div class="container">
 		<h1><font color = "white">Manager Home Page </font> </h1>
@@ -17,7 +17,7 @@
 <div class="card text-center">
 	<div class="card-header">
 
-				<!-- Nav tabs -->
+<!------------------------------------------------------------ Nav tabs ------------------------------------------------------------------->
 				
 				
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,6 +31,9 @@
 				    <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false"> View Reimbursements </a>
 				  </li>
 				  <li class="nav-item">
+				    <a class="nav-link" id="employees-tab" data-toggle="tab" href="#employees" role="tab" aria-controls="out" aria-selected="false"> View Employees </a>
+				  </li>
+				  <li class="nav-item">
 				    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#update" role="tab" aria-controls="settings" aria-selected="false"> Update Employee </a>
 				  </li>
 				  <li class="nav-item">
@@ -41,9 +44,9 @@
 				  </li>
 				</ul>
 
-<!---------------------------------------------------------------- Tab panes--------------------------------------------------------->
+<!----------------------------------------------------------- TAB PANES--------------------------------------------------------->
 						
-						<!-- Home -->
+<!-------------------------------------------------------------- Home -------------------------------------------------------------------->
 						
 						
 			<div class="tab-content">
@@ -54,8 +57,8 @@
 						  margin: auto;
 						  width: 50%;
 						  border: 3px solid green;
-						  padding: 10px;height : 300px;">
-					   <div class="card-header" id ="shane">Welcome!</div>
+						  padding: 10px;height : 170px;">
+					   <div class="card-header" id ="shane"><h4>Welcome!</h4></div>
 				  	<div class="card-body" id = "shane">
 		    	<h5 class="card-title" id = "dcard" ></h5> 
 			</div>
@@ -64,7 +67,7 @@
 					</div>
 						  
 						  
-						  <!-- Home -->
+  <!-------------------------------------------------------------- Home ------------------------------------------------------------------>
 						 
 						 
 						 <!-- Request Reimbursements -->
@@ -101,10 +104,10 @@
 			</center>	
 		</div>
 											 
-											 <!-- Request Reimbursements -->
+ <!------------------------------------------------------- Request Reimbursements ------------------------------------------------------->
 											 
-											 
-											 <!-- View Reimbursements -->
+									
+<!-------------------------------------------------------- View Reimbursements ---------------------------------------------------------->
 											 
 											 
 										<div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" style = "height : 500px;">
@@ -126,10 +129,34 @@
 					  				</div>
 					  
 						  
-						 <!-- View Reimbursements --> 
+ <!----------------------------------------------------------------- View Reimbursements -------------------------------------------------------------------------> 
+						 
+<!------------------------------------------------------------------ View Employees ------------------------------------------------------------------------------->
 						 
 						 
-						 <!-- Update Employee -->
+						 <div class="tab-pane" id="employees" role="tabpanel" aria-labelledby="employees-tab" style = "height : 500px;">
+						 
+						 
+						 <table class="table" >
+											  <thead >
+											    <tr>
+											      <th scope="col">Employee ID</th>
+											      <th scope="col">Fist Name</th>
+											      <th scope="col">Last Name</th>
+											      <th scope="col">Email</th>
+											    </tr>
+											  </thead>
+										  <tbody id="el">
+										  </tbody>
+										</table>
+						 
+						 
+						 </div>
+						 
+						 
+ <!----------------------------------------------------------------- View Employees ------------------------------------------------------------------------------->
+						 
+ <!----------------------------------------------------------------- Update Employee ----------------------------------------------------->
 						 
 						 
 	 <div class="tab-pane" id="update" role="tabpanel" aria-labelledby="settings-tab" style = "height : 500px;">
@@ -165,10 +192,10 @@
 						
 						  
 						  
-						 <!-- Update Employee -->
+<!---------------------------------------------------- Update Employee ------------------------------------------------------------------->
 						 
 						 
-						 <!-- Photo -->
+<!----------------------------------------------------- Photo ---------------------------------------------------------------------------->
 						 
 						 
 		  <div class="tab-pane" id="photo" role="tabpanel" aria-labelledby="photo-tab" style = "height : 500px;">
@@ -188,11 +215,11 @@
 			</form> 
 		 </div>
 				 
-				 
-						 <!-- Photo -->
+			
+<!------------------------------------------------------------- Photo ------------------------------------------------------------------->
 						 
 						 
-						 <!-- LogOut -->
+<!------------------------------------------------------------ LogOut ------------------------------------------------------------------->
 						 
 						 
 				 <div class="tab-pane" id="out" role="tabpanel" aria-labelledby="out-tab" style = "height : 500px;">
@@ -201,7 +228,7 @@
   						</form>
   				</div>
   					 	
-  						 <!-- LogOut -->
+ <!----------------------------------------------------------- LogOut -------------------------------------------------------------------->
   
   
   </div>

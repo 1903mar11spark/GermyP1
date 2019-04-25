@@ -32,7 +32,7 @@ public class ManagerProfile extends HttpServlet {
 		if(session != null ) {
 		request.getRequestDispatcher("ManagerView.html").forward(request, response);
 		}else {
-			request.getRequestDispatcher("home").forward(request, response);
+			response.sendRedirect("home");;
 		}
 	}
 

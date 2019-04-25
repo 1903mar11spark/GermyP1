@@ -29,16 +29,16 @@ public class HomeService {
 		home.UpdateEmployee(emp, user);
 		System.out.println("Service Method Update Employee Called for: " + emp.getFirstname());
 	}
-	public void ManagerUpdate(Employees emp, String user) {
+	public void ManagerUpdate(Employees emp) {
 		HomeDAOImpl home = new HomeDAOImpl();
-		home.ManagerUpdate(emp, user);
+		home.ManagerUpdate(emp);
 		System.out.println("Service Method Update Employee Called for: " + emp.getFirstname());
 	}
 	
-	public List<Employees> GetAllEmployees(Employees emp){
+	public List<Employees> GetAllEmployees(){
 		HomeDAOImpl home = new HomeDAOImpl();
 		List<Employees> all = new ArrayList<>(); 
-		all = home.AllEmployees(emp);
+		all = home.AllEmployees();
 		
 		return all;
 	}

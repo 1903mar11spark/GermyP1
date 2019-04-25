@@ -54,7 +54,7 @@ public class HomeDAOImpl implements HomeDAO {
 	}
 
 	@Override
-	public List<Employees> AllEmployees(Employees emp) {
+	public List<Employees> AllEmployees() {
 		//Create a list of employees form database to print out
 		List<Employees> all = new ArrayList<>();
 		ResultSet rs = null;
@@ -62,8 +62,7 @@ public class HomeDAOImpl implements HomeDAO {
 		
 		 try (Connection con = ConnectionUtil.getConnectionFromFile())
 		  { 
-			smt = con.prepareStatement("SELECT FROM EMPLOYEES  (EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, PIC, MANAGER_ID ) "
-					+ "VALUES (?,?,?,?,?,?)");
+			smt = con.prepareStatement("SELECT EMPLOYEE_ID, FIRSTNAME, LASTNAME, EMAIL, MANAGER_ID FROM EMPLOYEES ");
 		    rs = smt.executeQuery();
 		   
 				while (rs.next()) {
@@ -71,10 +70,9 @@ public class HomeDAOImpl implements HomeDAO {
 					String first = rs.getString("FIRSTNAME");
 					String last = rs.getString("LASTNAME");
 					String email = rs.getString("EMAIL");
-					String img = rs.getString("PIC");
 					int mID = rs.getInt("MANAGER_ID");
 					
-					all.add(new Employees(eID, first, last, email, img, mID));
+					all.add(new Employees(eID, first, last, email, mID));
 			  }
 		  }
 		  catch (SQLException e) 
@@ -89,6 +87,8 @@ public class HomeDAOImpl implements HomeDAO {
 		
 		return all;
 	}
+	
+	
 
 	@Override
 	//Returns an employee and all its values
@@ -280,7 +280,7 @@ public boolean upload(String pic, String email) {
 			return result;
 }
 
-public void ManagerUpdate(Employees emp, String user) {
+public void ManagerUpdate(Employees emp) {
 	PreparedStatement stmt = null, stmt2 = null;
 	ResultSet rs = null;
 	String first = "", last = "", mail = "", password = "";
@@ -319,7 +319,7 @@ public void ManagerUpdate(Employees emp, String user) {
 			  stmt2.setString(2, tlast);
 			  stmt2.setString(3, tmail);
 			  stmt2.setString(4, tpass);
-			  stmt2.setString(5, user);
+			  stmt2.setString(5, emp.getEmail());
 			  
 			  
 			  stmt2.executeUpdate();
